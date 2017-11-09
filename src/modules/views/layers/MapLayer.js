@@ -13,8 +13,8 @@ var MapLayer = cc.Layer.extend({
 
 
 
-        var crops = new SeedSprite(this, res.crops, ProductTypes.CROP_WHEAT);
-        var caroot = new SeedSprite(this, res.caroot, ProductTypes.CROP_CARROT);
+        var crops = new SeedSprite(this, res.crops, ProductTypes.CROP_WHEAT.TYPE);
+        var caroot = new SeedSprite(this, res.caroot, ProductTypes.CROP_CARROT.TYPE);
 
         crops.setPosition(cc.p(cc.winSize.width / 2 , cc.winSize.height / 2));
         caroot.setPosition(cc.p(cc.winSize.width / 2 - 100, cc.winSize.height / 2 - 100));

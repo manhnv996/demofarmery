@@ -10,7 +10,7 @@ var MapCtrl = cc.Class.extend({
         /*
          INPROGRESS
          */
-        return new Field(new Coordinate(300, 300), 'field01');;
+        return new Field(new Coordinate(300, 300), 1);;
     }
 });
 MapCtrl.instance = new MapCtrl();

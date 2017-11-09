@@ -41,7 +41,7 @@ var CropToolSprite = cc.Sprite.extend({
                 cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
 
                 //Call ctrl
-                var fieldSelected = PlantCtrl.onDragCropTool(this.x, this.y);
+                PlantCtrl.instance.onDragCropTool(this.x, this.y);
                 /*
                 INPROGRESS
                  */

@@ -132,7 +132,7 @@ CmdSendPlant = fr.OutPacket.extend(
         {
             this._super();
             this.initData(100);
-            this.setCmdId(gv.CMD.gv.CMD.PLANT);
+            this.setCmdId(gv.CMD.PLANT);
         },
         pack:function(fieldId, productType){
             this.packHeader();
@@ -151,7 +151,7 @@ CmdSendCrop = fr.OutPacket.extend(
         {
             this._super();
             this.initData(100);
-            this.setCmdId(gv.CMD.gv.CMD.CROP);
+            this.setCmdId(gv.CMD.CROP);
         },
         pack:function(fieldId, productType){
             this.packHeader();

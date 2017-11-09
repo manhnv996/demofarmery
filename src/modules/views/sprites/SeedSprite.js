@@ -45,7 +45,7 @@ var SeedSprite = cc.Sprite.extend({
                 cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
 
                 //Call ctrl
-                var fieldSelected = PlantCtrl.onDragSeed(seedType, this.x, this.y);
+                PlantCtrl.instance.onDragSeed(seedType, this.x, this.y);
                 /*
                  INPROGRESS
                  */
