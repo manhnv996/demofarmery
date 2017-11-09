@@ -1,0 +1,82 @@
+{
+    "project_type": "javascript",
+    "debugMode": 1,
+    "showFPS": true,
+    "frameRate": 60,
+    "id": "gameCanvas",
+    "renderMode": 0,
+    "engineDir": "frameworks/cocos2d-html5",
+    "modules": [
+        "cocos2d",
+        "extensions",
+        "external"
+    ],
+    "jsListOrder": [
+        "src/data/**/*.js",
+        "src/framework/**/*.js",
+        "src/gui/screen/**/*.js",
+        "src/**/*.js"
+    ],
+    "jsList": [
+        "src/data/Resource.js",
+        "src/data/ResourceAnimation.js",
+        "src/framework/AnimationMgr.js",
+        "src/framework/Framework.js",
+        "src/framework/GUI.js",
+        "src/framework/PoolObject.js",
+        "src/framework/Utility/ClientConfig.js",
+        "src/framework/Utility/Localization.js",
+        "src/framework/Utility/StringUtils.js",
+        "src/base/network/GameClient.js",
+        "src/base/network/GameClientListener.js",
+        "src/base/network/InPacketFactory.js",
+        "src/base/Resource.js",
+        "src/base/UIFactory.js",
+        "src/libs/md5.js",
+        "src/libs/signals.js",
+        "src/libs/underscore.js",
+        "src/modules/animation/ScreenDragonbones.js",
+        "src/modules/localization/ScreenLocalization.js",
+        "src/modules/mainmenu/ScreenMenu.js",
+        "src/modules/testnetwork/network/Network.js",
+        "src/modules/testnetwork/network/Packet.js",
+        "src/modules/testnetwork/ScreenNetwork.js",
+
+
+
+        "src/modules/views/scenes/MapScene.js",
+
+        "src/modules/views/layers/MapLayer.js",
+        "src/modules/views/layers/MyLayer.js",
+        "src/modules/views/layers/Popup.js",
+
+        "src/modules/views/sprites/SeedSprite.js",
+        "src/modules/views/sprites/CropToolSprite.js",
+        "src/modules/views/sprites/FieldSprite.js",
+
+
+
+        "src/modules/config/enum/ProductTypes.js",
+        "src/modules/config/enum/FieldStatusTypes.js",
+        "src/modules/config/config.js",
+        "src/modules/config/init.js",
+
+
+
+
+
+        "src/modules/controllers/PlantCtrl.js",
+        "src/modules/controllers/MapCtrl.js",
+
+
+
+        "src/modules/models/CoordinatedObject.js",
+        "src/modules/models/Coordinate.js",
+        "src/modules/models/Field.js",
+        "src/modules/models/StorageItem.js",
+        "src/modules/models/Storage.js",
+        "src/modules/models/Asset.js",
+        "src/modules/models/User.js"
+
+    ]
+}
