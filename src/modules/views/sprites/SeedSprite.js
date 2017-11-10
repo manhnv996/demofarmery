@@ -66,9 +66,12 @@ var SeedSprite = cc.Sprite.extend({
             onTouchEnded: function (touch, event) {
                 cc.log("sprite onTouchesEnded.. ");
 
+                var target = event.getCurrentTarget();
+                target.removeFromParent(true);
+
+
                 parent.removePopup();
 
-                //this.removeFromParent(true);
             }
         });
         cc.eventManager.addListener(dragListener, this);

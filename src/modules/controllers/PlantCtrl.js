@@ -47,10 +47,13 @@ var PlantCtrl = cc.Class.extend({
                 /*
                  FLOW UpgradeStorage
                  */
+            } else {
+                //send msg to server {packet{fieldId, productType}}
+                testnetwork.connector.sendCrop(fieldSelected.getFieldId(), fieldSelected.getPlantType());
             }
 
-            //send msg to server {packet{fieldId, productType}}
-            testnetwork.connector.sendCrop(fieldSelected.getFieldId(), fieldSelected.getPlantType());
+            ////send msg to server {packet{fieldId, productType}}
+            //testnetwork.connector.sendCrop(fieldSelected.getFieldId(), fieldSelected.getPlantType());
 
         } else {
             /*
