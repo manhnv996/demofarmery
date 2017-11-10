@@ -13,17 +13,25 @@ var MapLayer = cc.Layer.extend({
 
 
 
-        var crops = new SeedSprite(this, res.crops, ProductTypes.CROP_WHEAT.TYPE);
-        var caroot = new SeedSprite(this, res.caroot, ProductTypes.CROP_CARROT.TYPE);
+        this.fieldList = [];
 
-        crops.setPosition(cc.p(cc.winSize.width / 2 , cc.winSize.height / 2));
-        caroot.setPosition(cc.p(cc.winSize.width / 2 - 100, cc.winSize.height / 2 - 100));
+        var field1 = new FieldSprite(this, 0 , res.caroot_png);
+        var field2 = new FieldSprite(this, 1,  res.field);
 
-        this.addChild(crops);
-        this.addChild(caroot);
+        this.fieldList.push(field1);
+        this.fieldList.push(field2);
 
 
-        this.initFieldPlant(4, res.caroot_plist, res.caroot_png, "caroot", 2);
+        field1.setPosition(cc.p(cc.winSize.width / 2 + 200, cc.winSize.height / 2));
+        field2.setPosition(cc.p(cc.winSize.width / 2 + 200 - field1.width / 2, cc.winSize.height / 2 - field1.height / 2));
+
+        this.addChild(field1);
+        this.addChild(field2);
+
+
+        runnerBoundingBox = field1.getBoundingBox();
+        //this.initFieldPlant(4, res.caroot_plist, res.caroot_png, "caroot", 2);
+
 
 ////////////
         cc.spriteFrameCache.addSpriteFrames(res.runner_plist, res.runner_png); // sprite cache
@@ -34,9 +42,6 @@ var MapLayer = cc.Layer.extend({
         var spriteBatch = new cc.SpriteBatchNode(res.runner_png);
         spriteBatch.addChild(sprite);
         this.addChild(spriteBatch);
-
-        //
-        runnerBoundingBox = sprite.getBoundingBox();
 
 
 
@@ -140,14 +145,16 @@ var MapLayer = cc.Layer.extend({
         //var sprite = new cc.Sprite("#runner0.png"); // create sprite
         var sprite = new cc.Sprite("#" + str_first_seed + "0" + ".png"); // create sprite
         //var sprite = new FieldSprite("#" + str_first_seed + "0" + ".png"); // create sprite
-        sprite.setPosition(cc.p(cc.winSize.width / 2 + 200, cc.winSize.height / 2 + 200));
+        //sprite.setPosition(cc.p(cc.winSize.width / 2 + 200, cc.winSize.height / 2 + 200));
+        sprite.setPosition(cc.p(this.fieldList[0].getPosition().x, this.fieldList[0].getPosition().y));
 
         var spriteBatch = new cc.SpriteBatchNode(seed_png);
-        spriteBatch.addChild(sprite);
+        //spriteBatch.addChild(sprite);
+        spriteBatch.addChild(this.fieldList[0]);
         this.addChild(spriteBatch);
 
         //
-        runnerBoundingBox = sprite.getBoundingBox();
+        //runnerBoundingBox = sprite.getBoundingBox();
 
 
 
@@ -167,8 +174,52 @@ var MapLayer = cc.Layer.extend({
         // sprite.runAction(runningAction);
         // this.runningAction.retain();
         //sprite.runAction(cc.animate(animation).repeatForever());
-        sprite.runAction(cc.animate(animation).repeat(1));  //repeat one time
+        //sprite.runAction(cc.animate(animation).repeat(1));  //repeat one time
+        this.fieldList[0].runAction(cc.animate(animation).repeat(1));  //repeat one time
         ///////////
 
+    },
+
+    showPopup: function(){
+
+        //cc.log("showPopup");
+
+        this.popupBackground = cc.Sprite.create(res.popup);
+        this.popupBackground.setPosition(cc.winSize.width/2, cc.winSize.height/2);
+        this.addChild(this.popupBackground, 10);
+
+
+        var crops = new SeedSprite(this, res.crops, ProductTypes.CROP_WHEAT.TYPE);
+        var caroot = new SeedSprite(this, res.caroot, ProductTypes.CROP_CARROT.TYPE);
+
+        crops.setPosition(cc.p(this.popupBackground.width / 2 - this.popupBackground.width / 2 + crops.width / 2, this.popupBackground.height / 2 + this.popupBackground.height / 2 - crops.height / 2));
+        caroot.setPosition(cc.p(this.popupBackground.width / 2 - this.popupBackground.width / 2 + 1.5 * crops.width, this.popupBackground.height / 2 + this.popupBackground.height / 2 - crops.height / 2));
+
+        this.popupBackground.addChild(crops);
+        this.addChild(caroot);
+
+    },
+    disVisiblePopup: function(){
+        //cc.log("disvisible");
+        //this.removeChild(this.popupBackground);
+        if (this.popupBackground.isVisible()){
+            this.popupBackground.setVisible(false);
+        }
+
+    },
+    removePopup: function(){
+        //cc.log("remove popup");
+
+        if (this.getChildByTag(10)){
+            this.removeChild(this.popupBackground);
+        }
+    },
+
+    runAnimationPlantting: function(num, str_seed_key, speed){
+        this.fieldList[0].loadAnimFrames(num, str_seed_key, speed);
+
+        this.fieldList[0].runAnimationRepeat(1);
     }
+
 });
+//MapLayer.instance = new MapLayer();

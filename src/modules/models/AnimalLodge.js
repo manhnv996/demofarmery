@@ -8,7 +8,7 @@ var AnimalLodge = CoordinatedObject.extend({
 
 
     },
-    init: function () {
+    render: function () {
         //
 
     },

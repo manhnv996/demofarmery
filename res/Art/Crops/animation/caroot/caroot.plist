@@ -7,7 +7,7 @@
             <key>caroot0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,294},{205,110}}</string>
+                <string>{{2,266},{205,110}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>caroot1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{114,294},{193,136}}</string>
+                <string>{{114,266},{193,136}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>caroot2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,161},{214,131}}</string>
+                <string>{{2,133},{214,131}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>caroot3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{217,157}}</string>
+                <string>{{260,2},{217,157}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -56,6 +56,19 @@
                 <key>sourceSize</key>
                 <string>{217,157}</string>
             </dict>
+            <key>field.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{256,129}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{256,129}}</string>
+                <key>sourceSize</key>
+                <string>{256,129}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -64,9 +77,9 @@
             <key>realTextureFileName</key>
             <string>caroot.png</string>
             <key>size</key>
-            <string>{256,512}</string>
+            <string>{512,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:589280e3bd5d668ce0865c26a8de43be:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:032ffef5616d15dfdd80199ef168a7f6:1/1$</string>
             <key>textureFileName</key>
             <string>caroot.png</string>
         </dict>

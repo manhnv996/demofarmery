@@ -11,7 +11,7 @@ var Machine = CoordinatedObject.extend({
 
 
     },
-    init: function () {
+    render: function () {
         //
 
     },

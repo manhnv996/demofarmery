@@ -20,6 +20,8 @@ var PlantCtrl = cc.Class.extend({
             /*
             Show seedtable
              */
+            MapLayer.instance.showPopup();
+
         } else if (status == FieldStatusTypes.DONE){
             /*
             Show croptool
@@ -64,10 +66,17 @@ var PlantCtrl = cc.Class.extend({
 
         if (status == FieldStatusTypes.EMPTY){
             //
-            fieldSelected.plant(seedType);
+            //fieldSelected.plant(seedType);
+            if (fieldSelected.plant(seedType)){     //plant and if success
+                //send msg to server {packet{fieldId, productType}}
+                testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
 
-            //send msg to server {packet{fieldId, productType}}
-            testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
+                //animation
+                MapLayer.instance.runAnimationPlantting(4, "caroot", 2);
+            }
+
+            ////send msg to server {packet{fieldId, productType}}
+            //testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
             /*
              DONE
              */

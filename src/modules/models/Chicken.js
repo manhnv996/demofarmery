@@ -12,10 +12,10 @@ var Chicken = Animal.extend({
         //this._super();
         Animal.prototype.init(isFeeded, feefedTime);
 
-        this.init();
+        this.render();
 
     },
-    init: function () {
+    render: function () {
         //
 
     },

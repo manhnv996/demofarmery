@@ -8,7 +8,7 @@ var CropToolSprite = cc.Sprite.extend({
         this._super(tool_img);
 
         //
-        this.init();
+        this.render();
 
         var dragListener = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -62,7 +62,7 @@ var CropToolSprite = cc.Sprite.extend({
         });
         cc.eventManager.addListener(dragListener, this);
     },
-    init: function () {
+    render: function () {
 
     }
 });

@@ -28,8 +28,13 @@ var res = {
     caroot: "res/Art/Crops/Field/caroot.png",
     crops: "res/Art/Crops/Field/crops.png",
 
+    field: "res/Art/Crops/Field/field.png",
+
 
     liem: "res/Art/Tool/liem.png",
+
+    popup: "res/Art/Crops/Gui-act/5.png",
+
 
 
     //plant animation
@@ -124,12 +129,18 @@ var ress = {
     crops: "res/Art/Crops/Field/crops.png",
 
 
+    field: "res/Art/Crops/Field/field.png",
+
+
     liem: "res/Art/Tool/liem.png",
+
+    popup: "res/Art/Crops/Gui-act/5.png",
 
 
     //plant animation
     caroot_plist: "res/Art/Crops/animation/caroot/caroot.plist",
     caroot_png: "res/Art/Crops/animation/caroot/caroot.png",
+
 
 
 

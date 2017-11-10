@@ -10,7 +10,8 @@ var MapCtrl = cc.Class.extend({
         /*
          INPROGRESS
          */
-        return new Field(new Coordinate(300, 300), 1);;
+        //return new Field(new Coordinate(300, 300), 1);
+        return user.getAsset().getFieldById(1);
     }
 });
 MapCtrl.instance = new MapCtrl();

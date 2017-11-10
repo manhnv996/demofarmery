@@ -5,7 +5,8 @@
 var MapScene = cc.Scene.extend({
     ctor: function() {
         this._super();
-        var layer = new MapLayer();
-        this.addChild(layer);
+        //var layer = new MapLayer();
+        //this.addChild(layer);
+        this.addChild(MapLayer.instance = new MapLayer());
     }
 });

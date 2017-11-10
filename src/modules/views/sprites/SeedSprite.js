@@ -11,7 +11,7 @@ var SeedSprite = cc.Sprite.extend({
         this._super(seed_img);
 
         //
-        this.init(seedType);
+        this.render(seedType);
 
         var dragListener = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -29,7 +29,7 @@ var SeedSprite = cc.Sprite.extend({
                     return true;
                 }
 
-
+                parent.disVisiblePopup();
 
                 return false;
             },
@@ -42,31 +42,38 @@ var SeedSprite = cc.Sprite.extend({
                 //this.x = x / lstScale;
                 //this.y = y / lstScale;
 
-                cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
+                parent.disVisiblePopup();
 
-                //Call ctrl
-                PlantCtrl.instance.onDragSeed(seedType, this.x, this.y);
+                //cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
+
+                ////Call ctrl
+                //PlantCtrl.instance.onDragSeed(seedType, this.x, this.y);
                 /*
                  INPROGRESS
                  */
 
 
 
-                //var seedBoundingBox = this.getBoundingBox();
-                //if (cc.rectIntersectsRect(seedBoundingBox, runnerBoundingBox)){
-                //    cc.log("va chạm");
-                //}
+                var seedBoundingBox = this.getBoundingBox();
+                if (cc.rectIntersectsRect(seedBoundingBox, runnerBoundingBox)){
+                    //cc.log("va chạm");
+                    PlantCtrl.instance.onDragSeed(seedType, this.x, this.y);
+                }
 
 
             }.bind(this),
 
             onTouchEnded: function (touch, event) {
                 cc.log("sprite onTouchesEnded.. ");
+
+                parent.removePopup();
+
+                //this.removeFromParent(true);
             }
         });
         cc.eventManager.addListener(dragListener, this);
     },
-    init: function (seedType) {
+    render: function (seedType) {
 
         this.seedType = seedType;
     }

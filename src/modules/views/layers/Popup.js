@@ -29,7 +29,7 @@ var Popup = cc.Layer.extend({
 
         var centerPos = cc.p( size.width/2, size.height/2 );
 
-        var spriteBackground = cc.Sprite.create("res/bg/popup.png");
+        var spriteBackground = cc.Sprite.create(res.popup);
 
 
         spriteBackground.setPosition(size.width/2, size.height/2);
@@ -63,7 +63,6 @@ var Popup = cc.Layer.extend({
         var menu = cc.Menu.create(okItem);
         menu.setPosition(cc.p(0, 0));
         this.addChild(menu, 1);
-
 
     }
 

@@ -13,10 +13,10 @@ var Asset = cc.Class.extend({
         //
         //this._super();
 
-        this.init(foodStorage, warehouse, fieldList, animalLodgeList, machineList, natureThingList, myShop);
+        this.render(foodStorage, warehouse, fieldList, animalLodgeList, machineList, natureThingList, myShop);
 
     },
-    init: function (foodStorage, warehouse, fieldList, animalLodgeList, machineList, natureThingList, myShop) {
+    render: function (foodStorage, warehouse, fieldList, animalLodgeList, machineList, natureThingList, myShop) {
         //
         this.foodStorage = foodStorage;
         this.warehouse = warehouse;
@@ -56,6 +56,7 @@ var Asset = cc.Class.extend({
                 return this.fieldList[i];
             }
         }
+        return null;
     },
     addField: function (field) {
         //bug

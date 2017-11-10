@@ -11,10 +11,10 @@ var User = cc.Class.extend({
         //
         //this._super();
 
-        this.init(asset);
+        this.render(asset);
 
     },
-    init: function (asset) {
+    render: function (asset) {
         //
         this.level = 1;
         this.gold = 0;

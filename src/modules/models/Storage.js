@@ -9,18 +9,18 @@ var Storages = CoordinatedObject.extend({
         //
         this._super(coordinate);
 
-        this.init(storageId, capacity);
+        this.render(storageId, capacity);
 
     },
-    init: function (storageId, capacity) {
+    render: function (storageId, capacity) {
 
         this.storageId = storageId;
 
         this.capacity = capacity;
         // this.itemList = [];
-        this.itemList.push(new StorageItem(ProductTypes.CROP_CARROT, 5));
-        this.itemList.push(new StorageItem(ProductTypes.CROP_CORN, 4));
-        this.itemList.push(new StorageItem(ProductTypes.CUT_AXE, 2));
+        //this.itemList.push(new StorageItem(ProductTypes.CROP_CARROT.TYPE, 5));
+        //this.itemList.push(new StorageItem(ProductTypes.CROP_WHEAT.TYPE, 4));
+        //this.itemList.push(new StorageItem(ProductTypes.CUT_AXE.TYPE, 2));
 
     },
 

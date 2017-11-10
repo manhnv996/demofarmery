@@ -7,9 +7,9 @@ var Coordinate = cc.Class.extend({
         //
         //this._super();
 
-        this.init(x, y);
+        this.render(x, y);
     },
-    init: function (x, y) {
+    render: function (x, y) {
         //
         this.x = x;
         this.y = y;

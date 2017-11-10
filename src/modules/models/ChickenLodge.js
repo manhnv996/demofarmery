@@ -12,7 +12,7 @@ var ChickenLodge = AnimalLodge.extend({
 
 
     },
-    init: function () {
+    render: function () {
         //
 
     }

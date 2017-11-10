@@ -99,7 +99,10 @@ cc.game.onStart = function () {
         ////    TEST//
         ////     var field = new Field();
         var foodStorage = new Storages(new Coordinate(10, 10), initt.foodStorage.storageId, initt.foodStorage.capacity);
-        var warehouse = new Storages(new Coordinate(15, 10), initt.warehouse.storageId, initt.warehouse.capacity);
+        //var warehouse = new Storages(new Coordinate(15, 10), initt.warehouse.storageId, initt.warehouse.capacity);
+
+        foodStorage.addItem(ProductTypes.CROP_CARROT.TYPE, 10);
+        foodStorage.addItem(ProductTypes.CROP_WHEAT.TYPE, 10);
 
 
         var asset = new Asset(foodStorage, null, null, null, null, null, null);
@@ -110,15 +113,18 @@ cc.game.onStart = function () {
         for (var i = 0; i < 6; i++){
             var field = new Field(new Coordinate(300 - i * 20, 300 - i * 20), i);
             if (i % 2 == 0){
-                field.setPlantType(ProductTypes.CROP_CARROT);
+                //field.setPlantType(ProductTypes.CROP_CARROT.TYPE);
 
-                field.setPlantedTime(currentdate);
+                //field.setPlantedTime(currentdate);
             }
             asset.addField(field);
         }
 
 
-        cc.log(user.getAsset().getFieldList()[0].crop());
+        cc.log(JSON.stringify(user.getAsset().getFoodStorage().getItemList()));
+        cc.log(user.getAsset().getFoodStorage().getCurrentQuantity());
+        cc.log(user.getAsset().getFoodStorage().getCapacity());
+        //cc.log(user.getAsset().getFieldList()[0].crop());
 
 
 

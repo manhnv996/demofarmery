@@ -148,10 +148,11 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../../../animation/Carot/texture/Carot1/caroot0.png</filename>
-            <filename>../../../animation/Carot/texture/Carot1/caroot1.png</filename>
-            <filename>../../../animation/Carot/texture/Carot1/caroot2.png</filename>
-            <filename>../../../animation/Carot/texture/Carot1/caroot3.png</filename>
+            <filename>texture/Carot1/caroot0.png</filename>
+            <filename>texture/Carot1/caroot1.png</filename>
+            <filename>texture/Carot1/caroot2.png</filename>
+            <filename>texture/Carot1/caroot3.png</filename>
+            <filename>texture/Carot1/field.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

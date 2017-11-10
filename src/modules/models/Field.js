@@ -8,14 +8,14 @@ var Field = CoordinatedObject.extend({
     ctor: function (coordinate, fieldId) {
         //
         //this._super(coordinate);
-        CoordinatedObject.prototype.init(coordinate);
+        CoordinatedObject.prototype.render(coordinate);
 
-        this.init(fieldId);
+        this.render(fieldId);
 
         //cc.log("x " + CoordinatedObject.prototype.getCoordinate().call(this));
 
     },
-    init: function (fieldId) {
+    render: function (fieldId) {
         //
         this.fieldId = fieldId;
 
@@ -46,10 +46,13 @@ var Field = CoordinatedObject.extend({
         //boolean
         if (this.checkStatus() == FieldStatusTypes.EMPTY) {
 
+            //cc.log("plantting");
             if (user.getAsset().getFoodStorage().takeItem(productType, 1)) {
 
                 this.setPlantType(productType);
                 this.setPlantedTime(new Date());
+
+                cc.log("__" + this.plantType + ", " + this.plantedTime);
 
                 return true
             }
@@ -86,7 +89,7 @@ var Field = CoordinatedObject.extend({
         var cropTime = new Date();
         cropTime.setTime(parseTime + this.plantType.TIME_MIN * 1000 * 60);
 
-        cc.log(cropTime);
+        //cc.log(cropTime);
 
         return cropTime;
     },
