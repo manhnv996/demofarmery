@@ -82,9 +82,9 @@ var ProductTypes = {
 
 function getSeedLevel(level) {
 
-    var jsonString = JSON.stringify(ProductTypes);
-    cc.log(jsonString);
-    var jsonOject = JSON.parse(jsonString);
+    // var jsonString = JSON.stringify(ProductTypes);
+    // cc.log(jsonString);
+    // var jsonOject = JSON.parse(jsonString);
 
 
     //for (var i in jsonOject){
@@ -94,4 +94,58 @@ function getSeedLevel(level) {
     //
     //    break;
     //}
+
+
+    var array = [ProductTypes];
+    cc.log(JSON.stringify(array));
+
+    // find_value(array, 'EXP');
+
+    var matches = array.filter(function(val, index, array) {
+        return val.EXP === 1;
+    });
+
+    cc.log(matches);
+
+
+
+    // return [ProductTypes.CROP_WHEAT.TYPE, ProductTypes.CROP_CARROT.TYPE, ProductTypes.CROP_CORN.TYPE];
+
+}
+
+function find_value(array, key) {
+    // find will run the provided function for every object in array
+    var obj_found = _.find(array, function(obj) {
+        // keys returns the keys inside an object
+        // so if the key of currently examined object
+        // is what we are looking for, return the obj
+        if (_.keys(obj)[0] === key) {
+            return obj;
+        }
+    });
+    // if an object with such key was found return its value
+    if (obj_found) {
+        return obj_found[key];
+    } else {
+        return null;
+    }
+}
+
+
+
+// function getKeyByValue(object, value) {
+//     return Object.keys(object).find(key => object[key] === value);
+// }
+
+function getKey(object, value) {
+    var array = [ProductTypes];
+    array.keys(object).find('EXP', object['EXP'] === value);
+}
+//
+// var key = Object.keys(obj).filter(function(key) {return obj[key] === value})[0];
+
+var getKeyByValue = function(searchValue) {
+    return _.findKey(hash, function(hashValue) {
+        return searchValue === hashValue;
+    });
 }

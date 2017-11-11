@@ -33,7 +33,8 @@ var res = {
 
     liem: "res/Art/Tool/liem.png",
 
-    popup: "res/Art/Crops/Gui-act/5.png",
+    popup1: "res/Art/Crops/Gui-act/1.png",
+    popup2: "res/Art/Crops/Gui-act/2.png",
 
 
 
@@ -134,7 +135,8 @@ var ress = {
 
     liem: "res/Art/Tool/liem.png",
 
-    popup: "res/Art/Crops/Gui-act/5.png",
+    popup1: "res/Art/Crops/Gui-act/1.png",
+    popup2: "res/Art/Crops/Gui-act/2.png",
 
 
     //plant animation

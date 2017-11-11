@@ -82,7 +82,30 @@ cc.game.onStart = function () {
         fr.view(MapScene);
 
         //cc.log(ProductTypes.length);
-        //getSeedLevel(2);
+        // cc.log(JSON.stringify(getSeedLevel(1)));
+
+        var array = [ProductTypes];
+        cc.log(JSON.stringify(array));
+
+        // find_value(array, 'EXP');
+
+        var matches = array.filter(function(val, index, array) {
+            return val.EXP === 1;
+        });
+
+        cc.log(JSON.stringify(matches));
+
+
+
+        var filteredObj = array.find(function(item, i){
+            if(item.EXP === 1){
+                index = i;
+                return i;
+            }
+        });
+
+        cc.log(JSON.stringify(filteredObj));
+
 
 
         //var currentdate = new Date();
@@ -101,9 +124,8 @@ cc.game.onStart = function () {
         var foodStorage = new Storages(new Coordinate(10, 10), initt.foodStorage.storageId, initt.foodStorage.capacity);
         //var warehouse = new Storages(new Coordinate(15, 10), initt.warehouse.storageId, initt.warehouse.capacity);
 
-        foodStorage.addItem(ProductTypes.CROP_CARROT.TYPE, 10);
-        foodStorage.addItem(ProductTypes.CROP_WHEAT.TYPE, 10);
-
+        foodStorage.addItem(ProductTypes.CROP_CARROT, 10);
+        foodStorage.addItem(ProductTypes.CROP_WHEAT, 10);
 
         var asset = new Asset(foodStorage, null, null, null, null, null, null);
         user = new User(asset);
@@ -119,6 +141,17 @@ cc.game.onStart = function () {
             }
             asset.addField(field);
         }
+///////////////
+        var item = user.getAsset().getFoodStorage().getItemList();
+        var str = "FoodStorage: " + user.getAsset().getFoodStorage().getCurrentQuantity() + "/ " + user.getAsset().getFoodStorage().getCapacity() + "\n";
+        for (var _i = 0; _i < item.length; _i++){
+            cc.log(item[_i].getTypeItem().TYPE);
+            cc.log(item[_i].getQuantityItem());
+            str += "TYPE: " + item[_i].getTypeItem().TYPE + ", quantity: " + item[_i].getQuantityItem() + "\n";
+        }
+        MapLayer.instance.label1.setString(str);
+/////////////////
+
 
 
         cc.log(JSON.stringify(user.getAsset().getFoodStorage().getItemList()));

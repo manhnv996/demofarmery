@@ -22,7 +22,11 @@ var CropToolSprite = cc.Sprite.extend({
 
                 if (cc.rectContainsPoint(rect, locationInNode)) {
                     cc.log("sprite began... x = " + locationInNode.x + ", y = " + locationInNode.y);
-                    target.opacity = 180;
+
+                    //
+                    target.runAction(new cc.ScaleTo(0.1, 1.5, 1.5));
+
+                    // target.opacity = 180;
                     return true;
                 }
 
@@ -38,10 +42,14 @@ var CropToolSprite = cc.Sprite.extend({
                 //this.x = x / lstScale;
                 //this.y = y / lstScale;
 
-                cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
+                if (delta.x / lstScale > 0.01 || delta.y / lstScale > 0.01){
+                    parent.disVisiblePopup();
+                }
 
-                //Call ctrl
-                PlantCtrl.instance.onDragCropTool(this.x, this.y);
+                // cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
+
+                // //Call ctrl
+                // PlantCtrl.instance.onDragCropTool(this.x, this.y);
                 /*
                 INPROGRESS
                  */
@@ -49,15 +57,24 @@ var CropToolSprite = cc.Sprite.extend({
 
 
 
-                //var seedBoundingBox = this.getBoundingBox();
-                //if (cc.rectIntersectsRect(seedBoundingBox, runnerBoundingBox)){
-                //    cc.log("va chạm");
-                //}
+                var toolBoundingBox = this.getBoundingBox();
+                if (cc.rectIntersectsRect(toolBoundingBox, runnerBoundingBox)){
+                    //cc.log("va chạm");
+                    PlantCtrl.instance.onDragCropTool(this.x, this.y);
+                }
+
 
             }.bind(this),
 
             onTouchEnded: function (touch, event) {
                 cc.log("sprite onTouchesEnded.. ");
+
+                var target = event.getCurrentTarget();
+
+                target.runAction(new cc.ScaleTo(0.1, 1/1.5, 1/1.5));
+
+                target.removeFromParent(true);
+
             }
         });
         cc.eventManager.addListener(dragListener, this);

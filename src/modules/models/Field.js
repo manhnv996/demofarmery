@@ -70,7 +70,7 @@ var Field = CoordinatedObject.extend({
                 user.addExp(this.plantType.EXP);
 
                 var productCrop = this.plantType;
-                this.init();
+                this.render(this.fieldId);
 
                 return productCrop;
             }
@@ -87,9 +87,8 @@ var Field = CoordinatedObject.extend({
 
         var parseTime = this.plantedTime.getTime();
         var cropTime = new Date();
-        cropTime.setTime(parseTime + this.plantType.TIME_MIN * 1000 * 60);
-
-        //cc.log(cropTime);
+        // cropTime.setTime(parseTime + this.plantType.TIME_MIN * 1000 * 60);
+        cropTime.setTime(parseTime + 2000);     //HERE IS TEST
 
         return cropTime;
     },

@@ -20,16 +20,21 @@ var PlantCtrl = cc.Class.extend({
             /*
             Show seedtable
              */
-            MapLayer.instance.showPopup();
+            MapLayer.instance.showSeedPopup(fieldId);
+            cc.log("empty");
 
         } else if (status == FieldStatusTypes.DONE){
             /*
             Show croptool
              */
+            MapLayer.instance.showToolPopup(fieldId);
+            cc.log("done");
+
         } else {
             /*
             Show status
              */
+            cc.log("inprogress");
         }
 
     },
@@ -50,6 +55,20 @@ var PlantCtrl = cc.Class.extend({
             } else {
                 //send msg to server {packet{fieldId, productType}}
                 testnetwork.connector.sendCrop(fieldSelected.getFieldId(), fieldSelected.getPlantType());
+
+                //animation
+                MapLayer.instance.runAnimationCrop(1, "caroot", 0.2, fieldSelected.getFieldId());
+
+                ///////////////
+                var item = user.getAsset().getFoodStorage().getItemList();
+                var str = "FoodStorage: " + user.getAsset().getFoodStorage().getCurrentQuantity() + "/ " + user.getAsset().getFoodStorage().getCapacity() + "\n";
+                for (var _i = 0; _i < item.length; _i++){
+                    cc.log(item[_i].getTypeItem().TYPE);
+                    cc.log(item[_i].getQuantityItem());
+                    str += "TYPE: " + item[_i].getTypeItem().TYPE + ", quantity: " + item[_i].getQuantityItem() + "\n";
+                }
+                MapLayer.instance.label1.setString(str);
+                ////////////
             }
 
             ////send msg to server {packet{fieldId, productType}}
@@ -75,7 +94,18 @@ var PlantCtrl = cc.Class.extend({
                 testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
 
                 //animation
-                MapLayer.instance.runAnimationPlantting(4, "caroot", 2);
+                MapLayer.instance.runAnimationPlantting(4, "caroot", 0.5, fieldSelected.getFieldId());
+
+                ///////////////
+                var item = user.getAsset().getFoodStorage().getItemList();
+                var str = "FoodStorage: " + user.getAsset().getFoodStorage().getCurrentQuantity() + "/ " + user.getAsset().getFoodStorage().getCapacity() + "\n";
+                for (var _i = 0; _i < item.length; _i++){
+                    cc.log(item[_i].getTypeItem().TYPE);
+                    cc.log(item[_i].getQuantityItem());
+                    str += "TYPE: " + item[_i].getTypeItem().TYPE + ", quantity: " + item[_i].getQuantityItem() + "\n";
+                }
+                MapLayer.instance.label1.setString(str);
+                ////////////
             }
 
             ////send msg to server {packet{fieldId, productType}}

@@ -138,7 +138,8 @@ CmdSendPlant = fr.OutPacket.extend(
             this.packHeader();
 
             this.putShort(fieldId);
-            this.putShort(productType);
+            // this.putShort(productType);
+            this.putString(JSON.stringify(productType));
 
             this.updateSize();
         }
@@ -157,7 +158,8 @@ CmdSendCrop = fr.OutPacket.extend(
             this.packHeader();
 
             this.putShort(fieldId);
-            this.putShort(productType);
+            // this.putShort(productType);
+            this.putString(JSON.stringify(productType));
 
             this.updateSize();
         }

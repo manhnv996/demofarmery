@@ -25,11 +25,13 @@ var SeedSprite = cc.Sprite.extend({
 
                 if (cc.rectContainsPoint(rect, locationInNode)) {
                     cc.log("sprite began... x = " + locationInNode.x + ", y = " + locationInNode.y);
-                    target.opacity = 180;
+
+                    //
+                    target.runAction(new cc.ScaleTo(0.1, 1.5, 1.5));
+
+                    // target.opacity = 180;
                     return true;
                 }
-
-                parent.disVisiblePopup();
 
                 return false;
             },
@@ -42,7 +44,10 @@ var SeedSprite = cc.Sprite.extend({
                 //this.x = x / lstScale;
                 //this.y = y / lstScale;
 
-                parent.disVisiblePopup();
+                if (delta.x / lstScale > 0.01 || delta.y / lstScale > 0.01){
+                    parent.disVisiblePopup();
+                }
+
 
                 //cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
 
@@ -70,7 +75,7 @@ var SeedSprite = cc.Sprite.extend({
                 target.removeFromParent(true);
 
 
-                parent.removePopup();
+                // parent.removePopup();
 
             }
         });

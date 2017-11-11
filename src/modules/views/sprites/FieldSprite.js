@@ -8,27 +8,17 @@ var FieldSprite = cc.Sprite.extend({
     animFrames: [],
     animation: null,
 
-    ctor: function(parent, fieldId, seed_plist_img) {
+    ctor: function(parent, fieldId, seed_plist_img, seed_plist) {
         //this._super();
         this._super(seed_plist_img);
-
-
-        ////////////
-        //cc.spriteFrameCache.addSpriteFrames(res.caroot_plist, res.caroot_png); // sprite cache
-        cc.spriteFrameCache.addSpriteFrames(res.caroot_plist); // sprite cache
-
-        this.animation = new cc.Animation([cc.spriteFrameCache.getSpriteFrame("field.png")], 0.1);
-        this.runAction(cc.animate(this.animation).repeat(1));  //repeat one time
-        ///////////
-
-
 
         ////////
         //this.initWithFile(seed_plist_img);
 
-
         //
-        this.render(fieldId);
+        this.render(fieldId, seed_plist_img, seed_plist);
+
+
 
         var dragListener = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -83,7 +73,7 @@ var FieldSprite = cc.Sprite.extend({
 
                 //
                 PlantCtrl.instance.onFieldSelected(fieldId);
-                //parent.showPopup();
+                //parent.showSeedPopup();
 
                 //this.loadAnimFrames(4, "caroot", 0.2);
                 //this.runAnimationForever();
@@ -94,8 +84,21 @@ var FieldSprite = cc.Sprite.extend({
 
     },
 
-    render: function(fieldId){
+    render: function(fieldId, seed_plist_img, seed_plist){
         this.fieldId = fieldId;
+
+
+        if (seed_plist != null){
+            ////////////
+            //cc.spriteFrameCache.addSpriteFrames(res.caroot_plist, res.caroot_png); // sprite cache
+            cc.spriteFrameCache.addSpriteFrames(seed_plist); // sprite cache
+
+            this.animation = new cc.Animation([cc.spriteFrameCache.getSpriteFrame("field.png")], 0.1);
+            this.runAction(cc.animate(this.animation).repeat(1));  //repeat one time
+            ///////////
+
+        }
+
     },
 
 
