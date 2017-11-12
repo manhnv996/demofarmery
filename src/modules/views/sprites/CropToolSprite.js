@@ -43,7 +43,10 @@ var CropToolSprite = cc.Sprite.extend({
                 //this.y = y / lstScale;
 
                 if (delta.x / lstScale > 0.01 || delta.y / lstScale > 0.01){
-                    parent.disVisiblePopup();
+                    parent.popupItemList.shift();
+
+                    parent.disVisiblePopup(null);
+                    // parent.disVisiblePopupBackground();
                 }
 
                 // cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
@@ -75,6 +78,7 @@ var CropToolSprite = cc.Sprite.extend({
 
                 target.removeFromParent(true);
 
+                parent.disVisiblePopup(null);
             }
         });
         cc.eventManager.addListener(dragListener, this);

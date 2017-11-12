@@ -29,6 +29,9 @@ var SeedSprite = cc.Sprite.extend({
                     //
                     target.runAction(new cc.ScaleTo(0.1, 1.5, 1.5));
 
+                    parent.getIndexSeedOfPopupItemList(seedType);
+
+
                     // target.opacity = 180;
                     return true;
                 }
@@ -45,7 +48,11 @@ var SeedSprite = cc.Sprite.extend({
                 //this.y = y / lstScale;
 
                 if (delta.x / lstScale > 0.01 || delta.y / lstScale > 0.01){
-                    parent.disVisiblePopup();
+                    //
+                    parent.popupItemSelected = seedType;
+
+                    parent.disVisiblePopup(seedType);
+
                 }
 
 
@@ -74,8 +81,10 @@ var SeedSprite = cc.Sprite.extend({
                 var target = event.getCurrentTarget();
                 target.removeFromParent(true);
 
+                // parent.popupItemSelected = null;
 
                 // parent.removePopup();
+                parent.disVisiblePopup(seedType);
 
             }
         });

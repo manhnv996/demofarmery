@@ -10,6 +10,8 @@ var MapLayer = cc.Layer.extend({
     popupBackground: null,
     popupItemList: [],
 
+    popupItemSelected: null,
+
     fieldList: [],
 
     ctor: function() {
@@ -33,7 +35,7 @@ var MapLayer = cc.Layer.extend({
         this.addChild(field2);
 
 
-        runnerBoundingBox = this.fieldList[0].getBoundingBox();
+        runnerBoundingBox = this.fieldList[1].getBoundingBox();
         //this.initFieldPlant(4, res.caroot_plist, res.caroot_png, "caroot", 2);
 
 
@@ -47,7 +49,7 @@ var MapLayer = cc.Layer.extend({
 ////////////////////////////
 
 
-
+        this.testAni();
 
 ////////////
         cc.spriteFrameCache.addSpriteFrames(res.runner_plist, res.runner_png); // sprite cache
@@ -99,7 +101,8 @@ var MapLayer = cc.Layer.extend({
                 target.setOpacity(255);
 
                 //
-                target.disVisiblePopup();
+                // target.disVisiblePopup(this.popupItemSelected);
+                target.disVisiblePopup(null);
 
             }
         });
@@ -199,45 +202,112 @@ var MapLayer = cc.Layer.extend({
 
     },
 
-    showSeedPopup: function(fieldId){
+    showSeedPopup: function(fieldId, seedList){
 
         //cc.log("showPopup");
 
-        this.disVisiblePopup();
+        this.disVisiblePopup(null);
 
-        this.popupBackground = cc.Sprite.create(res.popup2);
-        this.popupBackground.setPosition(cc.winSize.width/2, cc.winSize.height/2);
-        this.addChild(this.popupBackground, 10);
 
+        // var crops = new SeedSprite(this, res.crops, ProductTypes.CROP_WHEAT);
+        // var caroot = new SeedSprite(this, res.caroot, ProductTypes.CROP_CARROT);
         //
-        var index = this.getIndexOfFieldList(fieldId);
-        cc.log("index = " + index);
-        if (index != null) {
-            this.popupBackground.setPosition(this.fieldList[index].x - this.fieldList[index].width / 1.5, this.fieldList[index].y + this.fieldList[index].height / 1.5);
-        }
-
-
-        // if (seedList != null){
-        //     for (var i = 0; i < seedList.length; i++){
-        //
-        //     }
-        // }
-
-
-
-        var crops = new SeedSprite(this, res.crops, ProductTypes.CROP_WHEAT);
-        var caroot = new SeedSprite(this, res.caroot, ProductTypes.CROP_CARROT);
-
-        crops.setPosition(cc.p(this.popupBackground.x - crops.width / 2, this.popupBackground.y));
-        caroot.setPosition(cc.p(this.popupBackground.x + caroot.width / 2, this.popupBackground.y));
+        // crops.setPosition(cc.p(this.popupBackground.x - crops.width / 2, this.popupBackground.y));
+        // caroot.setPosition(cc.p(this.popupBackground.x + caroot.width / 2, this.popupBackground.y));
 
 
         this.popupItemList = [];
-        this.popupItemList.push(crops);
-        this.popupItemList.push(caroot);
+        // this.popupItemList.push(crops);
+        // this.popupItemList.push(caroot);
 
-        this.addChild(crops);
-        this.addChild(caroot);
+        // this.addChild(crops);
+        // this.addChild(caroot);
+
+
+        //
+        if (seedList != null){
+
+            if (seedList.length > 3){
+                this.popupBackground = new cc.Sprite(res.popup5);
+            } else if (seedList.length == 3){
+                this.popupBackground = new cc.Sprite(res.popup4);
+            } else {
+                this.popupBackground = new cc.Sprite(res.popup2)
+            }
+
+
+            // this.popupBackground = cc.Sprite.create(res.popup2);
+            this.popupBackground.setPosition(cc.winSize.width/2, cc.winSize.height/2);
+            this.addChild(this.popupBackground, 10);
+
+            //
+            var index = this.getIndexOfFieldList(fieldId);
+            cc.log("index = " + index);
+            if (index != null) {
+                this.popupBackground.setPosition(this.fieldList[index].x - this.fieldList[index].width / 1.5, this.fieldList[index].y + this.fieldList[index].height / 1.5);
+            }
+
+            //
+            for (var i = 0; i < seedList.length; i++){
+                // var seed = new SeedSprite(this, seedList[i].seed_img, seedList[i].seedType);
+                var seed = new SeedSprite(this, res.crops, seedList[i].seedType);
+                seed.setPosition(cc.p(this.popupBackground.x, this.popupBackground.y));
+
+                this.popupItemList.push(seed);
+                this.addChild(seed);
+            }
+
+
+            //setPosition
+            switch (seedList.length){
+                case 1:
+
+                    break;
+                case 2:
+                    this.popupItemList[0].runAction(new cc.moveBy(0.1, - (this.popupItemList[0].width / 2), 0));
+                    this.popupItemList[1].runAction(new cc.moveBy(0.1, (this.popupItemList[1].height / 2), 0));
+                    break;
+                case 3:
+                    this.popupItemList[0].runAction(new cc.moveBy(0.1, - (this.popupItemList[0].width), 0));
+                    // this.popupItemList[1].runAction(new cc.moveBy(0.1, (this.popupItemList[1].height / 2), 0));
+                    this.popupItemList[2].runAction(new cc.moveBy(0.1, (this.popupItemList[2].width), 0));
+
+                    break;
+                case 4:
+                    this.popupItemList[0].runAction(new cc.moveBy(0.1, - (this.popupItemList[0].width), (this.popupItemList[0].height / 2)));
+                    this.popupItemList[1].runAction(new cc.moveBy(0.1, 0, (this.popupItemList[1].height / 2)));
+                    this.popupItemList[2].runAction(new cc.moveBy(0.1, (this.popupItemList[2].width), (this.popupItemList[1].height / 2)));
+
+                    this.popupItemList[3].runAction(new cc.moveBy(0.1, - (this.popupItemList[3].width / 2), - (this.popupItemList[3].height / 2)));
+
+                    break;
+                case 5:
+                    this.popupItemList[0].runAction(new cc.moveBy(0.1, - (this.popupItemList[0].width), (this.popupItemList[0].height / 2)));
+                    this.popupItemList[1].runAction(new cc.moveBy(0.1, 0, (this.popupItemList[1].height / 2)));
+                    this.popupItemList[2].runAction(new cc.moveBy(0.1, (this.popupItemList[2].width), (this.popupItemList[1].height / 2)));
+
+                    this.popupItemList[3].runAction(new cc.moveBy(0.1, - (this.popupItemList[3].width / 2), - (this.popupItemList[3].height / 2)));
+                    this.popupItemList[4].runAction(new cc.moveBy(0.1, + (this.popupItemList[3].width / 2), - (this.popupItemList[3].height / 2)));
+
+                    break;
+                default:
+
+            }
+
+
+        } else {
+            this.popupBackground = cc.Sprite.create(res.popup2);
+            this.popupBackground.setPosition(cc.winSize.width/2, cc.winSize.height/2);
+            this.addChild(this.popupBackground, 10);
+//
+            var index = this.getIndexOfFieldList(fieldId);
+            cc.log("index = " + index);
+            if (index != null) {
+                this.popupBackground.setPosition(this.fieldList[index].x - this.fieldList[index].width / 1.5, this.fieldList[index].y + this.fieldList[index].height / 1.5);
+            }
+
+        }
+
 
     },
 
@@ -245,10 +315,10 @@ var MapLayer = cc.Layer.extend({
 
         //cc.log("showPopup");
 
-        this.disVisiblePopup();
+        this.disVisiblePopup(null);
 
 
-        this.popupBackground = cc.Sprite.create(res.popup1);
+        this.popupBackground = cc.Sprite.create(res.popup2);
         this.popupBackground.setPosition(cc.winSize.width/2, cc.winSize.height/2);
         this.addChild(this.popupBackground, 10);
 
@@ -270,17 +340,11 @@ var MapLayer = cc.Layer.extend({
         this.addChild(tool);
 
     },
-    disVisiblePopup: function(){
+    disVisiblePopup: function(seedId){
         //cc.log("disvisible");
-        //this.removeChild(this.popupBackground);
-        if (this.popupBackground != null) {
-            if (this.popupBackground.isVisible()) {
-                this.popupBackground.setVisible(false);
-            }
+        this.disVisiblePopupBackground();
 
-        }
-//
-        this.disVisibleItemOfPopup(ProductTypes.CROP_WHEAT);
+        this.disVisibleItemOfPopup(seedId);
 
     },
     removePopup: function(){
@@ -316,6 +380,16 @@ var MapLayer = cc.Layer.extend({
 
 
     //
+    disVisiblePopupBackground: function () {
+        if (this.popupBackground != null) {
+            if (this.popupBackground.isVisible()) {
+                this.popupBackground.setVisible(false);
+            }
+
+        }
+//
+    },
+
     getIndexOfFieldList: function (fieldId) {
         if (fieldId == null){
             return null;
@@ -328,7 +402,12 @@ var MapLayer = cc.Layer.extend({
         return null;
     },
     getIndexSeedOfPopupItemList: function (seedId) {
-        if (seedId == null){    //tool
+        if (seedId == null){    //
+            if (this.popupItemList.length == 1){
+                if (!this.popupItemList[0].seedType){    //tool
+                    // return 0;
+                }
+            }
             return null;
         }
         for (var i = 0; i < this.popupItemList.length; i++){    //seed list
@@ -363,12 +442,20 @@ var MapLayer = cc.Layer.extend({
 
                 }
             }
+            this.popupItemList = [];
 
         }
 
     },
     removeItemOfPopup: function () {
 
+    },
+
+    testAni: function () {
+        var carootCan = fr.createAnimation(resAni.caroot_ani, resAniId.caroot_ani, this);
+        this.addChild(carootCan);
+        carootCan.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+        carootCan.gotoAndPlay('idle', -1);
     }
 
 });

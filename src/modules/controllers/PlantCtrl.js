@@ -20,7 +20,14 @@ var PlantCtrl = cc.Class.extend({
             /*
             Show seedtable
              */
-            MapLayer.instance.showSeedPopup(fieldId);
+            var seedList = [
+                {seedType: ProductTypes.CROP_CARROT},
+                {seedType: ProductTypes.CROP_WHEAT},
+                {seedType: ProductTypes.CROP_CORN},
+                // {seedType: ProductTypes.CROP_SUGARCANE},
+                // {seedType: ProductTypes.CROP_SOYBEAN}
+            ];
+            MapLayer.instance.showSeedPopup(fieldId, seedList);
             cc.log("empty");
 
         } else if (status == FieldStatusTypes.DONE){

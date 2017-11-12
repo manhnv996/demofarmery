@@ -35,6 +35,8 @@ var res = {
 
     popup1: "res/Art/Crops/Gui-act/1.png",
     popup2: "res/Art/Crops/Gui-act/2.png",
+    popup4: "res/Art/Crops/Gui-act/4.png",
+    popup5: "res/Art/Crops/Gui-act/5.png",
 
 
 
@@ -137,6 +139,8 @@ var ress = {
 
     popup1: "res/Art/Crops/Gui-act/1.png",
     popup2: "res/Art/Crops/Gui-act/2.png",
+    popup4: "res/Art/Crops/Gui-act/4.png",
+    popup5: "res/Art/Crops/Gui-act/5.png",
 
 
     //plant animation
