@@ -2,7 +2,7 @@
 var Field = CoordinatedObject.extend({
 
     fieldId: 0,
-    plantType: ProductTypes,
+    plantType: null,
     plantedTime: null,
 
     ctor: function (coordinate, fieldId) {

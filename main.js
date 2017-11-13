@@ -81,31 +81,15 @@ cc.game.onStart = function () {
         //fr.view(MyScene);
         fr.view(MapScene);
 
-        //cc.log(ProductTypes.length);
-        // cc.log(JSON.stringify(getSeedLevel(1)));
-
-        var array = [ProductTypes];
-        cc.log(JSON.stringify(array));
-
-        // find_value(array, 'EXP');
-
-        var matches = array.filter(function(val, index, array) {
-            return val.EXP === 1;
-        });
-
-        cc.log(JSON.stringify(matches));
 
 
 
-        var filteredObj = array.find(function(item, i){
-            if(item.EXP === 1){
-                index = i;
-                return i;
-            }
-        });
-
-        cc.log(JSON.stringify(filteredObj));
-
+        cc.log("seedLevel" + getSeedLevel(3));
+        //var str = [];
+        //cc.loader.loadJson('src/modules/config/json/cropconfig.json',function(error, data){
+        //    str = data
+        //    cc.log("data " + str);// data is the json object
+        //});
 
 
         //var currentdate = new Date();
@@ -127,6 +111,8 @@ cc.game.onStart = function () {
         foodStorage.addItem(ProductTypes.CROP_CARROT, 10);
         foodStorage.addItem(ProductTypes.CROP_WHEAT, 10);
 
+
+
         var asset = new Asset(foodStorage, null, null, null, null, null, null);
         user = new User(asset);
 
@@ -145,9 +131,11 @@ cc.game.onStart = function () {
         var item = user.getAsset().getFoodStorage().getItemList();
         var str = "FoodStorage: " + user.getAsset().getFoodStorage().getCurrentQuantity() + "/ " + user.getAsset().getFoodStorage().getCapacity() + "\n";
         for (var _i = 0; _i < item.length; _i++){
-            cc.log(item[_i].getTypeItem().TYPE);
+            //cc.log(item[_i].getTypeItem().TYPE);
+            cc.log(item[_i].getTypeItem());
             cc.log(item[_i].getQuantityItem());
-            str += "TYPE: " + item[_i].getTypeItem().TYPE + ", quantity: " + item[_i].getQuantityItem() + "\n";
+            //str += "TYPE: " + item[_i].getTypeItem().TYPE + ", quantity: " + item[_i].getQuantityItem() + "\n";
+            str += "TYPE: " + item[_i].getTypeItem() + ", quantity: " + item[_i].getQuantityItem() + "\n";
         }
         MapLayer.instance.label1.setString(str);
 /////////////////

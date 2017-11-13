@@ -7,12 +7,24 @@ var SeedSprite = cc.Sprite.extend({
     data: null,
     seedType: null,
 
+
     ctor: function(parent, seed_img, seedType) {
         this._super(seed_img);
 
         //
         this.render(seedType);
 
+        this.addDragEventListener(parent, seed_img, seedType);
+
+    },
+    render: function (seedType) {
+
+        this.seedType = seedType;
+    },
+
+
+    //
+    addDragEventListener: function (parent, seed_img, seedType) {
         var dragListener = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
@@ -90,8 +102,11 @@ var SeedSprite = cc.Sprite.extend({
         });
         cc.eventManager.addListener(dragListener, this);
     },
-    render: function (seedType) {
+    removeDragEventListener: function () {
+        //this.removeAllEventListeners();
+        /*
+        BUGGG
+         */
 
-        this.seedType = seedType;
     }
 });

@@ -23,10 +23,25 @@ var res = {
 
 
 
+    ///////////
+    cropconfig: "src/modules/config/json/cropconfig.json",
+    ////////////////
+
+
     //background_jpg: "res/img/background.jpg",
     //
     caroot: "res/Art/Crops/Field/caroot.png",
+    corn: "res/Art/Crops/Field/corn.png",
     crops: "res/Art/Crops/Field/crops.png",
+    sausages: "res/Art/Crops/Field/dau.png",
+    mia: "res/Art/Crops/Field/mia.png",
+
+    caroot_null: "res/Art/Crops/Gui-act/hethat/icon/carrot.png",
+    corn_null: "res/Art/Crops/Gui-act/hethat/icon/corn.png",
+    crops_null: "res/Art/Crops/Gui-act/hethat/icon/carrot.png",
+    sausages_null: "res/Art/Crops/Gui-act/hethat/icon/sausages.png",
+    mia_null: "res/Art/Crops/Gui-act/hethat/icon/mia.png",
+
 
     field: "res/Art/Crops/Field/field.png",
 
@@ -128,8 +143,27 @@ var ress = {
     //
     //background_jpg: "res/img/background.jpg",
     //
+
+
+    ///////////
+    cropconfig: "src/modules/config/json/cropconfig.json",
+    ////////////////
+
+
+
     caroot: "res/Art/Crops/Field/caroot.png",
+    corn: "res/Art/Crops/Field/corn.png",
     crops: "res/Art/Crops/Field/crops.png",
+    sausages: "res/Art/Crops/Field/dau.png",
+    mia: "res/Art/Crops/Field/mia.png",
+
+    caroot_null: "res/Art/Crops/Gui-act/hethat/icon/carrot.png",
+    corn_null: "res/Art/Crops/Gui-act/hethat/icon/corn.png",
+    crops_null: "res/Art/Crops/Gui-act/hethat/icon/carrot.png",
+    sausages_null: "res/Art/Crops/Gui-act/hethat/icon/sausages.png",
+    mia_null: "res/Art/Crops/Gui-act/hethat/icon/mia.png",
+
+
 
 
     field: "res/Art/Crops/Field/field.png",

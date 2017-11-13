@@ -49,7 +49,7 @@ var MapLayer = cc.Layer.extend({
 ////////////////////////////
 
 
-        this.testAni();
+        //this.testAni();
 
 ////////////
         cc.spriteFrameCache.addSpriteFrames(res.runner_plist, res.runner_png); // sprite cache
@@ -250,8 +250,50 @@ var MapLayer = cc.Layer.extend({
             //
             for (var i = 0; i < seedList.length; i++){
                 // var seed = new SeedSprite(this, seedList[i].seed_img, seedList[i].seedType);
-                var seed = new SeedSprite(this, res.crops, seedList[i].seedType);
+
+                var seed_img = null;
+                var seed_type = seedList[i].getTypeItem();
+                switch (seed_type){
+                    case ProductTypes.CROP_WHEAT:
+                        seed_img = res.crops;
+                        if (seedList[i].getQuantityItem() == null){
+                            seed_img = res.crops_null;
+                        }
+                        break;
+                    case ProductTypes.CROP_CARROT:
+                        seed_img = res.caroot;
+                        if (seedList[i].getQuantityItem() == null){
+                            seed_img = res.caroot_null;
+                        }
+                        break;
+                    case ProductTypes.CROP_CORN:
+                        seed_img = res.corn;
+                        if (seedList[i].getQuantityItem() == null){
+                            seed_img = res.corn_null;
+                        }
+                        break;
+                    case ProductTypes.CROP_SOYBEAN:
+                        seed_img = res.sausages;
+                        if (seedList[i].getQuantityItem() == null){
+                            seed_img = res.sausages_null;
+                        }
+                        break;
+                    default:
+                        seed_img = res.mia;
+                        if (seedList[i].getQuantityItem() == null){
+                            seed_img = res.mia_null;
+                        }
+                        break;
+                }
+                var seed = new SeedSprite(this, seed_img, seed_type);
+
+
                 seed.setPosition(cc.p(this.popupBackground.x, this.popupBackground.y));
+
+                ////
+                //if (seedList[i].getQuantityItem() == null){
+                //    seed.removeDragEventListener();
+                //}
 
                 this.popupItemList.push(seed);
                 this.addChild(seed);
@@ -301,7 +343,7 @@ var MapLayer = cc.Layer.extend({
             this.addChild(this.popupBackground, 10);
 //
             var index = this.getIndexOfFieldList(fieldId);
-            cc.log("index = " + index);
+            //cc.log("index = " + index);
             if (index != null) {
                 this.popupBackground.setPosition(this.fieldList[index].x - this.fieldList[index].width / 1.5, this.fieldList[index].y + this.fieldList[index].height / 1.5);
             }
@@ -371,9 +413,11 @@ var MapLayer = cc.Layer.extend({
     runAnimationCrop: function (num, str_seed_key, speed, fieldId) {
         var index = this.getIndexOfFieldList(fieldId);
         if (index != null){
-            this.fieldList[index].loadAnimFrames(num, str_seed_key, speed);
+            //this.fieldList[index].loadAnimFrames(num, str_seed_key, speed);
+            //
+            //this.fieldList[index].runAnimationRepeat(1);
 
-            this.fieldList[index].runAnimationRepeat(1);
+            this.fieldList[index].changeTexture(res.field);
         }
 
     },

@@ -1,7 +1,7 @@
 
 var StorageItem = cc.Class.extend({
 
-    typeItem: ProductTypes,
+    typeItem: null,
     quantity: Infinity,
 
     ctor: function (typeProduct, quantity) {
@@ -30,6 +30,11 @@ var StorageItem = cc.Class.extend({
     },
     getQuantityItem: function () {
         return this.quantity;
+    },
+
+    //
+    getLevelUnlock: function () {
+        return getProductObjByType(this.typeItem).level;
     }
 
 });

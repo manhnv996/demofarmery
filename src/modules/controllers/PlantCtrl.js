@@ -20,14 +20,36 @@ var PlantCtrl = cc.Class.extend({
             /*
             Show seedtable
              */
-            var seedList = [
-                {seedType: ProductTypes.CROP_CARROT},
-                {seedType: ProductTypes.CROP_WHEAT},
-                {seedType: ProductTypes.CROP_CORN},
-                // {seedType: ProductTypes.CROP_SUGARCANE},
-                // {seedType: ProductTypes.CROP_SOYBEAN}
-            ];
-            MapLayer.instance.showSeedPopup(fieldId, seedList);
+            //var seedList = [
+            //    {seedType: ProductTypes.CROP_CARROT},
+            //    {seedType: ProductTypes.CROP_WHEAT},
+            //    {seedType: ProductTypes.CROP_CORN},
+            //    // {seedType: ProductTypes.CROP_SUGARCANE},
+            //    // {seedType: ProductTypes.CROP_SOYBEAN}
+            //];
+
+
+            var seedList = user.getAsset().getFoodStorage().getItemList();
+
+            var seedLevel = getSeedLevel(user.getLevel());
+
+            var seedShow = [];
+            for (var i = 0; i < seedLevel.length; i++){
+                if (user.getAsset().getFoodStorage().getQuantity(seedLevel[i]) == 0){
+                    if (getProductObjByType(seedLevel[i]).level < user.getLevel()){
+                        seedShow.push(new StorageItem(seedLevel[i], 0))
+                    } else {
+                        seedShow.push(new StorageItem(seedLevel[i], null))
+                    }
+                }
+            }
+            for (var i = 0; i < seedList.length; i++){
+                seedShow.push(new StorageItem(seedList[i].getTypeItem(), seedList[i].getQuantityItem()));
+            }
+
+
+
+            MapLayer.instance.showSeedPopup(fieldId, seedShow);
             cc.log("empty");
 
         } else if (status == FieldStatusTypes.DONE){
@@ -65,6 +87,7 @@ var PlantCtrl = cc.Class.extend({
 
                 //animation
                 MapLayer.instance.runAnimationCrop(1, "caroot", 0.2, fieldSelected.getFieldId());
+
 
                 ///////////////
                 var item = user.getAsset().getFoodStorage().getItemList();

@@ -19,8 +19,32 @@ var FieldSprite = cc.Sprite.extend({
         this.render(fieldId, seed_plist_img, seed_plist);
 
 
+        this.addTouchEventListener(parent, fieldId)
 
-        var dragListener = cc.EventListener.create({
+    },
+
+    render: function(fieldId, seed_plist_img, seed_plist){
+        this.fieldId = fieldId;
+
+
+        if (seed_plist != null){
+            ////////////
+            //cc.spriteFrameCache.addSpriteFrames(res.caroot_plist, res.caroot_png); // sprite cache
+            cc.spriteFrameCache.addSpriteFrames(seed_plist); // sprite cache
+
+            this.animation = new cc.Animation([cc.spriteFrameCache.getSpriteFrame("field.png")], 0.1);
+            this.runAction(cc.animate(this.animation).repeat(1));  //repeat one time
+            ///////////
+
+        }
+
+    },
+
+    //
+    //
+    addTouchEventListener: function (parent, fieldId) {
+
+        var touchListener = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
             onTouchBegan: function (touch, event) {
@@ -80,25 +104,7 @@ var FieldSprite = cc.Sprite.extend({
 
             }
         });
-        cc.eventManager.addListener(dragListener, this);
-
-    },
-
-    render: function(fieldId, seed_plist_img, seed_plist){
-        this.fieldId = fieldId;
-
-
-        if (seed_plist != null){
-            ////////////
-            //cc.spriteFrameCache.addSpriteFrames(res.caroot_plist, res.caroot_png); // sprite cache
-            cc.spriteFrameCache.addSpriteFrames(seed_plist); // sprite cache
-
-            this.animation = new cc.Animation([cc.spriteFrameCache.getSpriteFrame("field.png")], 0.1);
-            this.runAction(cc.animate(this.animation).repeat(1));  //repeat one time
-            ///////////
-
-        }
-
+        cc.eventManager.addListener(touchListener, this);
     },
 
 
@@ -121,6 +127,29 @@ var FieldSprite = cc.Sprite.extend({
     },
     runAnimationRepeat: function(num){
         this.runAction(cc.animate(this.animation).repeat(num));  //repeat num time
+    },
+
+    //
+    //
+    changeTexture: function (texture) {
+        this.setTexture(texture);
+    },
+    ////
+    updateFieldStatus: function (curr, duration) {
+        //scheduleUpdate(this.updateFieldStatus());
+
+        if (this.fieldId != null){
+            if (curr > duration){
+                //
+            } else if (curr > duration * 3 / 4) {
+                //
+            } else if (curr > duration / 2) {
+
+            } else {    // < / 2
+
+            }
+        }
+
     }
 
 });
