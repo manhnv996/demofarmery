@@ -44,6 +44,9 @@ var SeedSprite = cc.Sprite.extend({
                     parent.getIndexSeedOfPopupItemList(seedType);
 
 
+                    target.removeAllChildrenWithCleanup(true);  //remove all child
+
+
                     // target.opacity = 180;
                     return true;
                 }

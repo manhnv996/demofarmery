@@ -10,6 +10,8 @@ var MapLayer = cc.Layer.extend({
     popupBackground: null,
     popupItemList: [],
 
+    popupQuantityItemList: [],
+
     popupItemSelected: null,
 
     fieldList: [],
@@ -21,8 +23,8 @@ var MapLayer = cc.Layer.extend({
 
         this.fieldList = [];
 
-        var field1 = new FieldSprite(this, 0 , res.caroot_png, res.caroot_plist);
-        var field2 = new FieldSprite(this, 1,  res.field, null);
+        var field1 = new FieldSprite(this, 0);
+        var field2 = new FieldSprite(this, 1);
 
         this.fieldList.push(field1);
         this.fieldList.push(field2);
@@ -222,7 +224,7 @@ var MapLayer = cc.Layer.extend({
 
         // this.addChild(crops);
         // this.addChild(caroot);
-
+        this.popupQuantityItemList = [];
 
         //
         if (seedList != null){
@@ -290,6 +292,12 @@ var MapLayer = cc.Layer.extend({
 
                 seed.setPosition(cc.p(this.popupBackground.x, this.popupBackground.y));
 
+                /////
+                var quantitySeed = new cc.LabelTTF(seedList[i].getQuantityItem(), "res/fonts/eff_number.fnt", 18);
+                seed.addChild(quantitySeed);
+                quantitySeed.setPosition(new cc.p(0, 0));
+                this.popupQuantityItemList.push(quantitySeed);
+
                 ////
                 //if (seedList[i].getQuantityItem() == null){
                 //    seed.removeDragEventListener();
@@ -334,6 +342,10 @@ var MapLayer = cc.Layer.extend({
                     break;
                 default:
 
+            }
+
+            for (var i = 0; i < this.popupQuantityItemList.length; i++){
+                this.popupQuantityItemList[i].runAction(new cc.moveTo(0.1, this.popupItemList[i].width / 4, this.popupItemList[i].height));
             }
 
 

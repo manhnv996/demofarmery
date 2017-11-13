@@ -8,37 +8,49 @@ var FieldSprite = cc.Sprite.extend({
     animFrames: [],
     animation: null,
 
-    ctor: function(parent, fieldId, seed_plist_img, seed_plist) {
+    // ctor: function(parent, fieldId, seed_plist_img, seed_plist) {
+    ctor: function(parent, fieldId) {
         //this._super();
-        this._super(seed_plist_img);
+        // this._super(seed_plist_img);
+        this._super(res.field);
 
         ////////
         //this.initWithFile(seed_plist_img);
 
         //
-        this.render(fieldId, seed_plist_img, seed_plist);
+        // this.render(fieldId, seed_plist_img, seed_plist);
+        this.render(fieldId);
 
 
-        this.addTouchEventListener(parent, fieldId)
+        this.addTouchEventListener(parent, fieldId);
+
+
+///////////
+        this.schedule(this.updateFieldStatus, 0.5);
+
 
     },
-
-    render: function(fieldId, seed_plist_img, seed_plist){
+    render: function (fieldId) {
         this.fieldId = fieldId;
 
-
-        if (seed_plist != null){
-            ////////////
-            //cc.spriteFrameCache.addSpriteFrames(res.caroot_plist, res.caroot_png); // sprite cache
-            cc.spriteFrameCache.addSpriteFrames(seed_plist); // sprite cache
-
-            this.animation = new cc.Animation([cc.spriteFrameCache.getSpriteFrame("field.png")], 0.1);
-            this.runAction(cc.animate(this.animation).repeat(1));  //repeat one time
-            ///////////
-
-        }
-
     },
+
+    // render: function(fieldId, seed_plist_img, seed_plist){
+    //     this.fieldId = fieldId;
+    //
+    //
+    //     if (seed_plist != null){
+    //         ////////////
+    //         //cc.spriteFrameCache.addSpriteFrames(res.caroot_plist, res.caroot_png); // sprite cache
+    //         cc.spriteFrameCache.addSpriteFrames(seed_plist); // sprite cache
+    //
+    //         this.animation = new cc.Animation([cc.spriteFrameCache.getSpriteFrame("field.png")], 0.1);
+    //         this.runAction(cc.animate(this.animation).repeat(1));  //repeat one time
+    //         ///////////
+    //
+    //     }
+    //
+    // },
 
     //
     //
@@ -136,16 +148,33 @@ var FieldSprite = cc.Sprite.extend({
     },
     ////
     updateFieldStatus: function (curr, duration) {
-        //scheduleUpdate(this.updateFieldStatus());
+
+        if (user.getAsset().getFieldList()[this.fieldId].getPlantedTime() == null){
+
+            this.changeTexture(res.field);
+            return false;
+        }
+
+        var parsePlantTime = user.getAsset().getFieldList()[this.fieldId].getPlantedTime().getTime();
+        var parseCropTime = user.getAsset().getFieldList()[this.fieldId].getCropTime().getTime();
+        var currTime = new Date().getTime();
+
+        duration = parseCropTime - parsePlantTime;
+        curr = currTime - parsePlantTime;
+
 
         if (this.fieldId != null){
-            if (curr > duration){
+            if (curr >= duration){
                 //
-            } else if (curr > duration * 3 / 4) {
+                this.changeTexture(getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType()).growImg4);
+            } else if (curr >= duration * 3 / 4) {
                 //
-            } else if (curr > duration / 2) {
+                this.changeTexture(getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType()).growImg3);
+            } else if (curr >= duration / 2) {
+                this.changeTexture(getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType()).growImg2);
 
             } else {    // < / 2
+                this.changeTexture(getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType()).growImg1);
 
             }
         }

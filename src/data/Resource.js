@@ -75,7 +75,15 @@ var res = {
     background_png :"res/res/background.png",
     background_plist : "res/res/background.plist",
     restart_n_png : "res/res/restart_n.png",
-    restart_s_png : "res/res/restart_s.png"
+    restart_s_png : "res/res/restart_s.png",
+
+
+
+    //
+    // carrot0: "res/animation/Carot/texture/Carot1/caroot0.png",
+    // carrot1: "res/animation/Carot/texture/Carot1/caroot1.png",
+    // carrot2: "res/animation/Carot/texture/Carot1/caroot2.png",
+    // carrot3: "res/animation/Carot/texture/Carot1/caroot3.png",
 
 };
 

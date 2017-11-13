@@ -37,9 +37,9 @@ var PlantCtrl = cc.Class.extend({
             for (var i = 0; i < seedLevel.length; i++){
                 if (user.getAsset().getFoodStorage().getQuantity(seedLevel[i]) == 0){
                     if (getProductObjByType(seedLevel[i]).level < user.getLevel()){
-                        seedShow.push(new StorageItem(seedLevel[i], 0))
+                        seedShow.push(new StorageItem(seedLevel[i], 0));
                     } else {
-                        seedShow.push(new StorageItem(seedLevel[i], null))
+                        seedShow.push(new StorageItem(seedLevel[i], null));
                     }
                 }
             }
@@ -86,7 +86,7 @@ var PlantCtrl = cc.Class.extend({
                 testnetwork.connector.sendCrop(fieldSelected.getFieldId(), fieldSelected.getPlantType());
 
                 //animation
-                MapLayer.instance.runAnimationCrop(1, "caroot", 0.2, fieldSelected.getFieldId());
+                // MapLayer.instance.runAnimationCrop(1, "caroot", 0.2, fieldSelected.getFieldId());
 
 
                 ///////////////
@@ -124,7 +124,7 @@ var PlantCtrl = cc.Class.extend({
                 testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
 
                 //animation
-                MapLayer.instance.runAnimationPlantting(4, "caroot", 0.5, fieldSelected.getFieldId());
+                // MapLayer.instance.runAnimationPlantting(4, "caroot", 0.5, fieldSelected.getFieldId());
 
                 ///////////////
                 var item = user.getAsset().getFoodStorage().getItemList();
