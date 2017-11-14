@@ -14,7 +14,7 @@ var SeedSprite = cc.Sprite.extend({
         //
         this.render(seedType);
 
-        this.addDragEventListener(parent, seed_img, seedType);
+        this.addDragEventListener(parent, seedType);
 
     },
     render: function (seedType) {
@@ -24,7 +24,8 @@ var SeedSprite = cc.Sprite.extend({
 
 
     //
-    addDragEventListener: function (parent, seed_img, seedType) {
+    // addDragEventListener: function (parent, seed_img, seedType) {
+    addDragEventListener: function (parent, seedType) {
         var dragListener = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,

@@ -455,14 +455,14 @@ var MapLayer = (function() {
 		initFieldList: function () {
 			this.fieldList = [];
 
-			var field1 = new FieldSprite(this, 0, 25, 25);
-			var field2 = new FieldSprite(this, 1, 25, 26);
-
-			this.fieldList.push(field1);
-			this.fieldList.push(field2);
-
-			this.addChild(field1);
-			this.addChild(field2);
+			// var field1 = new FieldSprite(this, 0, 25, 25);
+			// var field2 = new FieldSprite(this, 1, 25, 26);
+            //
+			// this.fieldList.push(field1);
+			// this.fieldList.push(field2);
+            //
+			// this.addChild(field1);
+			// this.addChild(field2);
 
 
 			/////////////////////////////////////////////
@@ -512,40 +512,43 @@ var MapLayer = (function() {
 				//
 				for (var i = 0; i < seedList.length; i++){
 
-					var seed_img = null;
+					// var seed_img = null;
 					var seed_type = seedList[i].getTypeItem();
-					switch (seed_type){
-						case ProductTypes.CROP_WHEAT:
-							seed_img = res.crops;
-							if (seedList[i].getQuantityItem() == null){
-								seed_img = res.crops_null;
-							}
-							break;
-						case ProductTypes.CROP_CARROT:
-							seed_img = res.caroot;
-							if (seedList[i].getQuantityItem() == null){
-								seed_img = res.caroot_null;
-							}
-							break;
-						case ProductTypes.CROP_CORN:
-							seed_img = res.corn;
-							if (seedList[i].getQuantityItem() == null){
-								seed_img = res.corn_null;
-							}
-							break;
-						case ProductTypes.CROP_SOYBEAN:
-							seed_img = res.sausages;
-							if (seedList[i].getQuantityItem() == null){
-								seed_img = res.sausages_null;
-							}
-							break;
-						default:
-							seed_img = res.mia;
-							if (seedList[i].getQuantityItem() == null){
-								seed_img = res.mia_null;
-							}
-							break;
-					}
+					// switch (seed_type){
+					// 	case ProductTypes.CROP_WHEAT:
+					// 		seed_img = res.crops;
+					// 		if (seedList[i].getQuantityItem() == null){
+					// 			seed_img = res.crops_null;
+					// 		}
+					// 		break;
+					// 	case ProductTypes.CROP_CARROT:
+					// 		seed_img = res.caroot;
+					// 		if (seedList[i].getQuantityItem() == null){
+					// 			seed_img = res.caroot_null;
+					// 		}
+					// 		break;
+					// 	case ProductTypes.CROP_CORN:
+					// 		seed_img = res.corn;
+					// 		if (seedList[i].getQuantityItem() == null){
+					// 			seed_img = res.corn_null;
+					// 		}
+					// 		break;
+					// 	case ProductTypes.CROP_SOYBEAN:
+					// 		seed_img = res.sausages;
+					// 		if (seedList[i].getQuantityItem() == null){
+					// 			seed_img = res.sausages_null;
+					// 		}
+					// 		break;
+					// 	default:
+					// 		seed_img = res.mia;
+					// 		if (seedList[i].getQuantityItem() == null){
+					// 			seed_img = res.mia_null;
+					// 		}
+					// 		break;
+					// }
+
+                    var seed_img = getSeedImgBySeedTypeAndQuantity(seed_type, seedList[i].getQuantityItem());
+
 					var seed = new SeedSprite(this, seed_img, seed_type);
 
 
@@ -591,15 +594,24 @@ var MapLayer = (function() {
 
 						break;
 					case 5:
-						this.popupItemList[0].runAction(new cc.moveBy(0.1, - (this.popupItemList[0].width), (this.popupItemList[0].height / 2)));
-						this.popupItemList[1].runAction(new cc.moveBy(0.1, 0, (this.popupItemList[1].height / 2)));
-						this.popupItemList[2].runAction(new cc.moveBy(0.1, (this.popupItemList[2].width), (this.popupItemList[1].height / 2)));
+                        this.popupItemList[0].runAction(new cc.moveBy(0.1, - (this.popupItemList[0].width), (this.popupItemList[0].height / 2)));
+                        this.popupItemList[1].runAction(new cc.moveBy(0.1, 0, (this.popupItemList[1].height / 2)));
+                        this.popupItemList[2].runAction(new cc.moveBy(0.1, (this.popupItemList[2].width), (this.popupItemList[1].height / 2)));
 
-						this.popupItemList[3].runAction(new cc.moveBy(0.1, - (this.popupItemList[3].width / 2), - (this.popupItemList[3].height / 2)));
-						this.popupItemList[4].runAction(new cc.moveBy(0.1, + (this.popupItemList[3].width / 2), - (this.popupItemList[3].height / 2)));
+                        this.popupItemList[3].runAction(new cc.moveBy(0.1, - (this.popupItemList[3].width / 2), - (this.popupItemList[3].height / 2)));
+                        this.popupItemList[4].runAction(new cc.moveBy(0.1, + (this.popupItemList[3].width / 2), - (this.popupItemList[3].height / 2)));
 
-						break;
+                        break;
+
 					default:
+						var temp = Math.floor(this.popupItemList.length / 2);
+						for (var i = 0; i < this.popupItemList.length; i++){
+							if (i < temp + 1){
+                                this.popupItemList[i].runAction(new cc.moveBy(0.1, - (Math.pow(-1, i)) * (temp - i - 1) * (this.popupItemList[i].width), (this.popupItemList[i].height / 2)));
+							} else {
+                                this.popupItemList[i].runAction(new cc.moveBy(0.1, + (Math.pow(-1, i)) * (temp * 2 - i) * (this.popupItemList[i].width) + (this.popupItemList[i].width / 2), - (this.popupItemList[i].height / 2)));
+							}
+						}
 
 				}
 

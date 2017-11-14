@@ -112,43 +112,10 @@ var g_resources = [
     "zcsd/screen_localize.json",
     "zcsd/screen_menu.json",
     "zcsd/screen_network.json",
-    "zcsd/screen_zalo.json",
+    "zcsd/screen_zalo.json"
 
 
 
-
-
-
-    "src/modules/configs/json/cropconfig.json",
-
-
-    "res/Art/Crops/Field/caroot.png",
-    "res/Art/Crops/Field/corn.png",
-    "res/Art/Crops/Field/crops.png",
-    "res/Art/Crops/Field/dau.png",
-    "res/Art/Crops/Field/mia.png",
-
-    "res/Art/Crops/Gui-act/hethat/icon/carrot.png",
-    "res/Art/Crops/Gui-act/hethat/icon/corn.png",
-    "res/Art/Crops/Gui-act/hethat/icon/carrot.png",
-    "res/Art/Crops/Gui-act/hethat/icon/sausages.png",
-    "res/Art/Crops/Gui-act/hethat/icon/mia.png",
-
-
-    "res/Art/Crops/Field/field.png",
-
-
-    "res/Art/Tool/liem.png",
-
-    "res/Art/Crops/Gui-act/1.png",
-    "res/Art/Crops/Gui-act/2.png",
-    "res/Art/Crops/Gui-act/4.png",
-    "res/Art/Crops/Gui-act/5.png",
-
-
-
-    "res/Art/Crops/animation/caroot/caroot.plist",
-    "res/Art/Crops/animation/caroot/caroot.png"
 
 ];
 
@@ -156,4 +123,9 @@ for (var k in MapResource) {
     res[k] = MapResource[k];
 }
 
+for (var i in res) {
+    g_resources.push(res[i]);
+}
+
 g_resources = g_resources.concat(g_MapResource);
+

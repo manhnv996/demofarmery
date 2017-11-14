@@ -69,7 +69,7 @@ var Asset = cc.Class.extend({
     getFieldByLogicPosition: function (lx, ly) {
         for (var i = 0; i < this.fieldList.length; i++){
 
-            //cc.log(this.fieldList[i].getCoordinate().getCurrX() + ", +  " + this.fieldList[i].getCoordinate().getCurrY());
+            // cc.log(this.fieldList[i].getCoordinate().getCurrX() + ", +  " + this.fieldList[i].getCoordinate().getCurrY());
 
             if (this.fieldList[i].getCoordinate().getCurrX() == lx){
                 if (this.fieldList[i].getCoordinate().getCurrY() == ly){

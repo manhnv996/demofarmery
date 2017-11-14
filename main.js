@@ -100,10 +100,14 @@ cc.game.onStart = function () {
         var currentdate = new Date();
         currentdate.setHours(3, 50, 40);
         for (var i = 0; i < 2; i++){
-            var field = new Field(new Coordinate(25, 25 + i), i);
-
+            var field = new Field(new Coordinate(18, 10 + i), i);
             asset.addField(field);
+////
+            var fieldSprite = new FieldSprite(MapLayer.instance, i, 18, 10 + i);
+            MapLayer.instance.addChild(fieldSprite);
+            MapLayer.instance.fieldList.push(fieldSprite);
         }
+        cc.log(user.getAsset().getFieldList().length + "ddd");
 ///////////////
 //        var item = user.getAsset().getFoodStorage().getItemList();
 //        var str = "FoodStorage: " + user.getAsset().getFoodStorage().getCurrentQuantity() + "/ " + user.getAsset().getFoodStorage().getCapacity() + "\n";
