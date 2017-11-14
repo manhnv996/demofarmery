@@ -10,7 +10,14 @@ var resAniId = {
     firework_test: "firework_test",
 
     //
-    caroot_ani: "carot"
+    Carot: "Carot",
+    Mia: "Mia",
+    Ngo: "Ngo",
+    Luanuoc: "Luanuoc",
+    DauHL: "DauHL",
+
+    SugarCan: "sugar_mill",
+
 };
 
 //path
@@ -22,5 +29,11 @@ var resAni = {
 
 
     //
-    caroot_ani: "res/animation/Carot"
+    Carot: "game/animation/Carot",
+    Mia: "game/animation/Mia",
+    Ngo: "game/animation/Ngo",
+    Luanuoc: "game/animation/Luanuoc",
+    DauHL: "game/animation/DauHL",
+
+    sugar_mill: "game/animation/SugarCan"
 };

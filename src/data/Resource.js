@@ -137,7 +137,20 @@ var g_resources = [
     "zcsd/screen_localize.json",
     "zcsd/screen_menu.json",
     "zcsd/screen_network.json",
-    "zcsd/screen_zalo.json"
+    "zcsd/screen_zalo.json",
+
+
+
+///////////
+//     "res/animation/Carot/skeleton.xml",
+//
+//     "res/animation/Carot/texture.plist",
+//     "res/animation/Carot/texture.png",
+
+
+    // "game/animation/SugarCan/skeleton.xml",
+    // "game/animation/SugarCan/texture.plist",
+    // "game/animation/SugarCan/texture.png",
 ];
 
 

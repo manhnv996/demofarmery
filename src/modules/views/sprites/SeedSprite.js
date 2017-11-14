@@ -62,13 +62,11 @@ var SeedSprite = cc.Sprite.extend({
                 //this.x = x / lstScale;
                 //this.y = y / lstScale;
 
-                if (delta.x / lstScale > 0.01 || delta.y / lstScale > 0.01){
-                    //
-                    parent.popupItemSelected = seedType;
 
-                    parent.disVisiblePopup(seedType);
+                ////
+                parent.popupItemSelected = seedType;
+                parent.disVisiblePopup(seedType);
 
-                }
 
 
                 //cc.log("onTouchMoved: " + delta.x + ", " + delta.y);

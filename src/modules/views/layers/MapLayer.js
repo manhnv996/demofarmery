@@ -51,7 +51,7 @@ var MapLayer = cc.Layer.extend({
 ////////////////////////////
 
 
-        //this.testAni();
+        this.testAni();
 
 ////////////
         cc.spriteFrameCache.addSpriteFrames(res.runner_plist, res.runner_png); // sprite cache
@@ -508,10 +508,35 @@ var MapLayer = cc.Layer.extend({
     },
 
     testAni: function () {
-        var carootCan = fr.createAnimation(resAni.caroot_ani, resAniId.caroot_ani, this);
-        this.addChild(carootCan);
-        carootCan.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
-        carootCan.gotoAndPlay('idle', -1);
+        // var carootCan = fr.createAnimation(resAni.caroot_ani, resAniId.caroot_ani, this);
+        // this.addChild(carootCan);
+        // carootCan.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+        // carootCan.gotoAndPlay('idle', -1);
+
+        this.nodeAnimation = new cc.Node();
+        this.nodeAnimation.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+        this.nodeAnimation.setScaleX(-1);
+        this.addChild(this.nodeAnimation);
+
+
+        // this.character = fr.createAnimationById(resAniId.chipu,this);
+        // //doi mau, yeu cau phai co file shader, nhung bone co ten bat dau tu color_ se bi doi mau
+        // this.character.setBaseColor(255,255,0);
+        // //chinh toc do play animation
+        // this.character.getAnimation().setTimeScale(0.5);
+        // this.nodeAnimation.addChild(this.character);
+        // //play animation gotoAndPlay(animationName, fadeInTime, duration, playTimes) //playTimes == 0 is repeatForever
+        // this.character.getAnimation().gotoAndPlay("idle_0_",-1);
+
+
+        var carootCan = fr.createAnimationById(resAniId.Carot, this);
+        // this.addChild(carootCan);
+        // carootCan.getAnimation().setTimeScale(0.5);
+        // carootCan.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+        // carootCan.gotoAndPlay('idle', -1);
+
+        this.nodeAnimation.addChild(carootCan);
+        carootCan.getAnimation().gotoAndPlay("Carot_Harvest",-1, 5, 0);
     }
 
 });
