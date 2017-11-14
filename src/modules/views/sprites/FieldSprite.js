@@ -8,6 +8,9 @@ var FieldSprite = cc.Sprite.extend({
     animFrames: [],
     animation: null,
 
+    plantSprite: null,
+    seedType: null,
+
     // ctor: function(parent, fieldId, seed_plist_img, seed_plist) {
     ctor: function(parent, fieldId) {
         //this._super();
@@ -32,6 +35,20 @@ var FieldSprite = cc.Sprite.extend({
     },
     render: function (fieldId) {
         this.fieldId = fieldId;
+
+        //this.plantSprite = fr.createAnimationById(resAniId.Carot, this);
+        // this.addChild(carootCan);
+        // carootCan.getAnimation().setTimeScale(0.5);
+        // carootCan.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
+        // carootCan.gotoAndPlay('idle', -1);
+
+
+        //this.plantSprite = new cc.Sprite(res.field);
+        //
+        //this.addChild(this.plantSprite);
+
+
+        //this.plantSprite.getAnimation().gotoAndPlay("Carot_Harvest",-1, 5, 0);
 
     },
 
@@ -141,6 +158,45 @@ var FieldSprite = cc.Sprite.extend({
         this.runAction(cc.animate(this.animation).repeat(num));  //repeat num time
     },
 
+
+    plantAnimation: function (seedType) {
+
+        this.removeAllChildrenWithCleanup(true);
+
+        if (this.fieldId != null){
+
+            var plantTypeObj = getProductObjByType(seedType);
+
+            //
+            this.seedType = seedType;
+
+            this.plantSprite = fr.createAnimationById(getResAniIdBySeedType(seedType), this);
+
+            this.plantSprite.setPosition(cc.p(0, this.height));
+            this.addChild(this.plantSprite);
+            this.plantSprite.getAnimation().setTimeScale(0.5);
+            this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.plantAni,-1, -1, 1);
+
+        }
+    },
+    cropAnimation: function (seedType) {
+        if (this.fieldId != null){
+
+            //var plantTypeObj = getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType());
+            var plantTypeObj = getProductObjByType(seedType);
+
+            //this.plantSprite = fr.createAnimationById(resAniId.Carot, this);
+            //this.addChild(this.plantSprite);
+            this.plantSprite.getAnimation().setTimeScale(0.5);
+            this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.cropAni,-1, -1, 1);
+
+
+            //this.fieldList[index].changeTexture(res.field);
+        }
+        this.seedType = null;
+
+    },
+
     //
     //
     changeTexture: function (texture) {
@@ -163,18 +219,33 @@ var FieldSprite = cc.Sprite.extend({
         curr = currTime - parsePlantTime;
 
 
-        if (this.fieldId != null){
+        //if (this.fieldId != null){
+        if (this.plantSprite != null){
+
+            var plantTypeObj = getProductObjByType(this.seedType);
+
             if (curr >= duration){
                 //
-                this.changeTexture(getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType()).growImg4);
+                //this.changeTexture(getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType()).growImg4);
+
+
+                this.plantSprite.getAnimation().setTimeScale(0.5);
+                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow4,-1, -1, 1);
             } else if (curr >= duration * 3 / 4) {
                 //
-                this.changeTexture(getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType()).growImg3);
+                this.plantSprite.getAnimation().setTimeScale(0.5);
+                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow3,-1, -1, 1);
             } else if (curr >= duration / 2) {
-                this.changeTexture(getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType()).growImg2);
+                this.plantSprite.getAnimation().setTimeScale(0.5);
+                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow2,-1, -1, 1);
+
+            } else if(curr >= duration * 1 / 4){
+                this.plantSprite.getAnimation().setTimeScale(0.5);
+                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow1,-1, -1, 1);
 
             } else {    // < / 2
-                this.changeTexture(getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType()).growImg1);
+                this.plantSprite.getAnimation().setTimeScale(0.5);
+                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.plantAni,-1, -1, 1);
 
             }
         }

@@ -13,7 +13,7 @@ var resAniId = {
     Carot: "Carot",
     Mia: "Mia",
     Ngo: "Ngo",
-    Luanuoc: "Luanuoc",
+    luanuoc: "luanuoc",
     DauHL: "DauHL",
 
     SugarCan: "sugar_mill",
@@ -32,7 +32,7 @@ var resAni = {
     Carot: "game/animation/Carot",
     Mia: "game/animation/Mia",
     Ngo: "game/animation/Ngo",
-    Luanuoc: "game/animation/Luanuoc",
+    luanuoc: "game/animation/Luanuoc",
     DauHL: "game/animation/DauHL",
 
     sugar_mill: "game/animation/SugarCan"

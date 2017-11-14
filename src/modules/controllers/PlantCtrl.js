@@ -75,6 +75,8 @@ var PlantCtrl = cc.Class.extend({
 
         if (status == FieldStatusTypes.DONE){
             //
+            var seedType = fieldSelected.getPlantType();
+
             if (fieldSelected.crop() == null){  //crop and check crop fail
 
                 //full foodStorage
@@ -87,6 +89,7 @@ var PlantCtrl = cc.Class.extend({
 
                 //animation
                 // MapLayer.instance.runAnimationCrop(1, "caroot", 0.2, fieldSelected.getFieldId());
+                 MapLayer.instance.runAnimationCrop(fieldSelected.getFieldId(), seedType);
 
 
                 ///////////////
@@ -125,6 +128,7 @@ var PlantCtrl = cc.Class.extend({
 
                 //animation
                 // MapLayer.instance.runAnimationPlantting(4, "caroot", 0.5, fieldSelected.getFieldId());
+                 MapLayer.instance.runAnimationPlantting(fieldSelected.getFieldId(), seedType);
 
                 ///////////////
                 var item = user.getAsset().getFoodStorage().getItemList();

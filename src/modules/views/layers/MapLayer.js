@@ -51,7 +51,7 @@ var MapLayer = cc.Layer.extend({
 ////////////////////////////
 
 
-        this.testAni();
+        //this.testAni();
 
 ////////////
         cc.spriteFrameCache.addSpriteFrames(res.runner_plist, res.runner_png); // sprite cache
@@ -413,21 +413,45 @@ var MapLayer = cc.Layer.extend({
         // }
     },
 
-    runAnimationPlantting: function(num, str_seed_key, speed, fieldId){
+    //runAnimationPlantting: function(num, str_seed_key, speed, fieldId){
+    runAnimationPlantting: function(fieldId, seedType){
         var index = this.getIndexOfFieldList(fieldId);
         if (index != null){
-            this.fieldList[index].loadAnimFrames(num, str_seed_key, speed);
 
-            this.fieldList[index].runAnimationRepeat(1);
+            //var plantTypeObj = getProductObjByType(seedType);
+            //
+            //var plantAni = fr.createAnimationById(resAniId.Carot, this);
+            //plantAni.setPosition(cc.p(0, this.fieldList[index].height));
+            //this.fieldList[index].addChild(plantAni);
+            //plantAni.getAnimation().setTimeScale(0.5);
+            //plantAni.getAnimation().gotoAndPlay(plantTypeObj.plantAni,-1, -1, 1);
+
+
+            this.fieldList[index].plantAnimation(seedType);
+
         }
 
+
     },
-    runAnimationCrop: function (num, str_seed_key, speed, fieldId) {
+    //runAnimationCrop: function (num, str_seed_key, speed, fieldId) {
+    runAnimationCrop: function (fieldId, seedType) {
         var index = this.getIndexOfFieldList(fieldId);
         if (index != null){
-            //this.fieldList[index].loadAnimFrames(num, str_seed_key, speed);
+            ////this.fieldList[index].loadAnimFrames(num, str_seed_key, speed);
+            ////
+            ////this.fieldList[index].runAnimationRepeat(1);
             //
-            //this.fieldList[index].runAnimationRepeat(1);
+            ////var plantTypeObj = getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType());
+            //var plantTypeObj = getProductObjByType(seedType);
+            //
+            //var plantAni = fr.createAnimationById(resAniId.Carot, this);
+            //plantAni.setPosition(cc.p(0, this.fieldList[index].height));
+            //this.fieldList[index].addChild(plantAni);
+            //plantAni.getAnimation().setTimeScale(0.5);
+            //plantAni.getAnimation().gotoAndPlay(plantTypeObj.cropAni,-1, -1, 1);
+
+
+            this.fieldList[index].cropAnimation(seedType);
 
             this.fieldList[index].changeTexture(res.field);
         }

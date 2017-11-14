@@ -11,7 +11,7 @@ var MapCtrl = cc.Class.extend({
          INPROGRESS
          */
         //return new Field(new Coordinate(300, 300), 1);
-        return user.getAsset().getFieldById(1);
+        return user.getAsset().getFieldById(0);
     }
 });
 MapCtrl.instance = new MapCtrl();
