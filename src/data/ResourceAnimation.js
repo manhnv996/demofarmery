@@ -4,36 +4,46 @@
 
 //id
 var resAniId = {
-    demoEffect: "demoEffect",
-    chipu: "chipu",
-    eff_dice_number: "eff_dice_number",
-    firework_test: "firework_test",
+	demoEffect: "demoEffect",
+SugarCan: "SugarCan",
+Bagia: "Bagia",
+bakery: "bakery",
+Cachua: "Cachua",
+Carot: "Carot",
+Cayrung: "Cayrung",
+CayTao: "CayTao",
+chipu: "chipu",
+Cherry: "Cherry",
 
-    //
-    Carot: "Carot",
-    Mia: "Mia",
-    Ngo: "Ngo",
-    luanuoc: "luanuoc",
-    DauHL: "DauHL",
 
-    SugarCan: "sugar_mill",
+	//
+	//Carot: "Carot",
+	Mia: "Mia",
+	Ngo: "Ngo",
+	luanuoc: "luanuoc",
+	DauHL: "DauHL",
 
 };
 
 //path
 var resAni = {
-    demoEffect: "game/animation/effects/landmarkConstruct",
-    chipu: "game/animation/character/chipu",
-    eff_dice_number: "game/animation/eff_dice_number",
-    firework_test: "game/animation/firework_test",
+	demoEffect:"game/animation/effects/landmarkConstruct",
+SugarCan: "game/animation/SugarCan",
+Bagia: "game/animation/Bagia",
+bakery: "game/animation/bakery",
+Cachua: "game/animation/Cachua",
+Carot: "game/animation/Carot",
+Cayrung: "game/animation/Cayrung",
+CayTao: "game/animation/CayTao",
+chipu: "game/animation/character/chipu",
+Cherry: "game/animation/Cherry",
 
 
-    //
-    Carot: "game/animation/Carot",
-    Mia: "game/animation/Mia",
-    Ngo: "game/animation/Ngo",
-    luanuoc: "game/animation/Luanuoc",
-    DauHL: "game/animation/DauHL",
+	//
+	//Carot: "game/animation/Carot",
+	Mia: "game/animation/Mia",
+	Ngo: "game/animation/Ngo",
+	luanuoc: "game/animation/Luanuoc",
+	DauHL: "game/animation/DauHL",
 
-    sugar_mill: "game/animation/SugarCan"
 };

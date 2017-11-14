@@ -85,23 +85,25 @@ var PlantCtrl = cc.Class.extend({
                  */
             } else {
                 //send msg to server {packet{fieldId, productType}}
-                testnetwork.connector.sendCrop(fieldSelected.getFieldId(), fieldSelected.getPlantType());
+////////
+//                testnetwork.connector.sendCrop(fieldSelected.getFieldId(), fieldSelected.getPlantType());
+/////
 
                 //animation
                 // MapLayer.instance.runAnimationCrop(1, "caroot", 0.2, fieldSelected.getFieldId());
                  MapLayer.instance.runAnimationCrop(fieldSelected.getFieldId(), seedType);
 
 
-                ///////////////
-                var item = user.getAsset().getFoodStorage().getItemList();
-                var str = "FoodStorage: " + user.getAsset().getFoodStorage().getCurrentQuantity() + "/ " + user.getAsset().getFoodStorage().getCapacity() + "\n";
-                for (var _i = 0; _i < item.length; _i++){
-                    cc.log(item[_i].getTypeItem().TYPE);
-                    cc.log(item[_i].getQuantityItem());
-                    str += "TYPE: " + item[_i].getTypeItem().TYPE + ", quantity: " + item[_i].getQuantityItem() + "\n";
-                }
-                MapLayer.instance.label1.setString(str);
-                ////////////
+///////////////
+//                var item = user.getAsset().getFoodStorage().getItemList();
+//                var str = "FoodStorage: " + user.getAsset().getFoodStorage().getCurrentQuantity() + "/ " + user.getAsset().getFoodStorage().getCapacity() + "\n";
+//                for (var _i = 0; _i < item.length; _i++){
+//                    cc.log(item[_i].getTypeItem().TYPE);
+//                    cc.log(item[_i].getQuantityItem());
+//                    str += "TYPE: " + item[_i].getTypeItem().TYPE + ", quantity: " + item[_i].getQuantityItem() + "\n";
+//                }
+//                MapLayer.instance.label1.setString(str);
+////////////
             }
 
             ////send msg to server {packet{fieldId, productType}}
@@ -117,42 +119,48 @@ var PlantCtrl = cc.Class.extend({
         //
         var fieldSelected = MapCtrl.instance.getField(x, y);
 
-        var status = fieldSelected.checkStatus();
+        if (fieldSelected != null){
 
-        if (status == FieldStatusTypes.EMPTY){
-            //
-            //fieldSelected.plant(seedType);
-            if (fieldSelected.plant(seedType)){     //plant and if success
-                //send msg to server {packet{fieldId, productType}}
-                testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
+            var status = fieldSelected.checkStatus();
 
-                //animation
-                // MapLayer.instance.runAnimationPlantting(4, "caroot", 0.5, fieldSelected.getFieldId());
-                 MapLayer.instance.runAnimationPlantting(fieldSelected.getFieldId(), seedType);
+            if (status == FieldStatusTypes.EMPTY){
+                //
+                //fieldSelected.plant(seedType);
+                if (fieldSelected.plant(seedType)){     //plant and if success
+                    //send msg to server {packet{fieldId, productType}}
+////////
+//                testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
+/////
 
-                ///////////////
-                var item = user.getAsset().getFoodStorage().getItemList();
-                var str = "FoodStorage: " + user.getAsset().getFoodStorage().getCurrentQuantity() + "/ " + user.getAsset().getFoodStorage().getCapacity() + "\n";
-                for (var _i = 0; _i < item.length; _i++){
-                    cc.log(item[_i].getTypeItem().TYPE);
-                    cc.log(item[_i].getQuantityItem());
-                    str += "TYPE: " + item[_i].getTypeItem().TYPE + ", quantity: " + item[_i].getQuantityItem() + "\n";
+                    //animation
+                    // MapLayer.instance.runAnimationPlantting(4, "caroot", 0.5, fieldSelected.getFieldId());
+                    MapLayer.instance.runAnimationPlantting(fieldSelected.getFieldId(), seedType);
+
+///////////////
+                    //var item = user.getAsset().getFoodStorage().getItemList();
+                    //var str = "FoodStorage: " + user.getAsset().getFoodStorage().getCurrentQuantity() + "/ " + user.getAsset().getFoodStorage().getCapacity() + "\n";
+                    //for (var _i = 0; _i < item.length; _i++){
+                    //    cc.log(item[_i].getTypeItem().TYPE);
+                    //    cc.log(item[_i].getQuantityItem());
+                    //    str += "TYPE: " + item[_i].getTypeItem().TYPE + ", quantity: " + item[_i].getQuantityItem() + "\n";
+                    //}
+                    //MapLayer.instance.label1.setString(str);
+////////////
                 }
-                MapLayer.instance.label1.setString(str);
-                ////////////
+
+                ////send msg to server {packet{fieldId, productType}}
+                //testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
+                /*
+                 DONE
+                 */
+
+            } else {
+                /*
+                 DO NOTHING
+                 */
             }
-
-            ////send msg to server {packet{fieldId, productType}}
-            //testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
-            /*
-             DONE
-             */
-
-        } else {
-            /*
-             DO NOTHING
-             */
         }
+
     }
 });
 PlantCtrl.instance = new PlantCtrl();

@@ -26,7 +26,7 @@ var CropToolSprite = cc.Sprite.extend({
                     //
                     target.runAction(new cc.ScaleTo(0.1, 1.5, 1.5));
 
-                    // target.opacity = 180;
+                     target.opacity = 180;
                     return true;
                 }
 
@@ -37,8 +37,9 @@ var CropToolSprite = cc.Sprite.extend({
 
                 var delta = touch.getDelta();
 
-                this.x += delta.x / lstScale;
-                this.y += delta.y / lstScale;
+
+                this.x += delta.x / MapLayer.instance.scale;
+                this.y += delta.y / MapLayer.instance.scale;
                 //this.x = x / lstScale;
                 //this.y = y / lstScale;
 
@@ -60,11 +61,11 @@ var CropToolSprite = cc.Sprite.extend({
 
 
 
-                var toolBoundingBox = this.getBoundingBox();
-                if (cc.rectIntersectsRect(toolBoundingBox, runnerBoundingBox)){
-                    //cc.log("va chạm");
+                //var toolBoundingBox = this.getBoundingBox();
+                //if (cc.rectIntersectsRect(toolBoundingBox, runnerBoundingBox)){
+                //    //cc.log("va chạm");
                     PlantCtrl.instance.onDragCropTool(this.x, this.y);
-                }
+                //}
 
 
             }.bind(this),
@@ -73,6 +74,7 @@ var CropToolSprite = cc.Sprite.extend({
                 cc.log("sprite onTouchesEnded.. ");
 
                 var target = event.getCurrentTarget();
+                target.opacity = 255;
 
                 target.runAction(new cc.ScaleTo(0.1, 1/1.5, 1/1.5));
 

@@ -11,7 +11,9 @@ var MapCtrl = cc.Class.extend({
          INPROGRESS
          */
         //return new Field(new Coordinate(300, 300), 1);
-        return user.getAsset().getFieldById(0);
+        var pointLogic = MapValues.positionToLogic(x, y);
+        //return user.getAsset().getFieldById(0);
+        return user.getAsset().getFieldByLogicPosition(pointLogic.x, pointLogic.y);
     }
 });
 MapCtrl.instance = new MapCtrl();

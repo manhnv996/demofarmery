@@ -2,7 +2,8 @@
  * Created by CPU60133_LOCAL on 11/9/2017.
  */
 
-var FieldSprite = cc.Sprite.extend({
+//var FieldSprite = cc.Sprite.extend({
+var FieldSprite = MapBlockSprite.extend({
 
     fieldId: null,
     animFrames: [],
@@ -12,10 +13,9 @@ var FieldSprite = cc.Sprite.extend({
     seedType: null,
 
     // ctor: function(parent, fieldId, seed_plist_img, seed_plist) {
-    ctor: function(parent, fieldId) {
+    ctor: function(parent, fieldId, x, y) {
         //this._super();
-        // this._super(seed_plist_img);
-        this._super(res.field);
+        this._super(res.field, 1, 1, x, y);
 
         ////////
         //this.initWithFile(seed_plist_img);
@@ -85,6 +85,7 @@ var FieldSprite = cc.Sprite.extend({
 
                 if (cc.rectContainsPoint(rect, locationInNode)) {
                     //cc.log("sprite began... x = " + locationInNode.x + ", y = " + locationInNode.y);
+
                     target.opacity = 180;
                     return true;
                 }
@@ -123,7 +124,8 @@ var FieldSprite = cc.Sprite.extend({
 
             onTouchEnded: function (touch, event) {
                 cc.log("sprite onTouchesEnded.. ");
-
+                var target = event.getCurrentTarget();
+                target.opacity = 255;
                 //
                 PlantCtrl.instance.onFieldSelected(fieldId);
                 //parent.showSeedPopup();

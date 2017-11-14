@@ -25,9 +25,6 @@ var ScreenMenu = cc.Layer.extend({
         this.addChild(btnDragonbones);
         btnDragonbones.addClickEventListener(this.onSelectDragonbones.bind(this));
 
-
-
-
     },
     onEnter:function(){
         this._super();

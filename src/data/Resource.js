@@ -17,14 +17,14 @@ var res = {
     ZCSD_SCREEN_ZALO:"zcsd/screen_zalo.json",
     //popup
     ZCSD_POPUP_MINI_GAME:"zcsd/game/mini_game/PopupMiniGame.json",
-
     //images
     Slot1_png : "zcsd/slot1.png",
 
 
 
+//////////////////
     ///////////
-    cropconfig: "src/modules/config/json/cropconfig.json",
+    cropconfig: "src/modules/configs/json/cropconfig.json",
     ////////////////
 
 
@@ -59,31 +59,6 @@ var res = {
     caroot_plist: "res/Art/Crops/animation/caroot/caroot.plist",
     caroot_png: "res/Art/Crops/animation/caroot/caroot.png",
 
-
-
-
-
-    helloBG_png : "res/res/helloBG.png",
-    start_n_png : "res/res/start_n.png",
-    start_s_png : "res/res/start_s.png",
-    PlayBG_png  : "res/res/PlayBG.png",
-    runner_png  : "res/res/running.png",
-    runner_plist : "res/res/running.plist",
-    map_png : "res/res/map.png",
-    map00_tmx : "res/res/map00.tmx",
-    map01_tmx : "res/res/map01.tmx",
-    background_png :"res/res/background.png",
-    background_plist : "res/res/background.plist",
-    restart_n_png : "res/res/restart_n.png",
-    restart_s_png : "res/res/restart_s.png",
-
-
-
-    //
-    // carrot0: "res/animation/Carot/texture/Carot1/caroot0.png",
-    // carrot1: "res/animation/Carot/texture/Carot1/caroot1.png",
-    // carrot2: "res/animation/Carot/texture/Carot1/caroot2.png",
-    // carrot3: "res/animation/Carot/texture/Carot1/caroot3.png",
 
 };
 
@@ -141,88 +116,44 @@ var g_resources = [
 
 
 
-///////////
-//     "res/animation/Carot/skeleton.xml",
-//
-//     "res/animation/Carot/texture.plist",
-//     "res/animation/Carot/texture.png",
 
 
-    // "game/animation/SugarCan/skeleton.xml",
-    // "game/animation/SugarCan/texture.plist",
-    // "game/animation/SugarCan/texture.png",
+
+    "src/modules/configs/json/cropconfig.json",
+
+
+    "res/Art/Crops/Field/caroot.png",
+    "res/Art/Crops/Field/corn.png",
+    "res/Art/Crops/Field/crops.png",
+    "res/Art/Crops/Field/dau.png",
+    "res/Art/Crops/Field/mia.png",
+
+    "res/Art/Crops/Gui-act/hethat/icon/carrot.png",
+    "res/Art/Crops/Gui-act/hethat/icon/corn.png",
+    "res/Art/Crops/Gui-act/hethat/icon/carrot.png",
+    "res/Art/Crops/Gui-act/hethat/icon/sausages.png",
+    "res/Art/Crops/Gui-act/hethat/icon/mia.png",
+
+
+    "res/Art/Crops/Field/field.png",
+
+
+    "res/Art/Tool/liem.png",
+
+    "res/Art/Crops/Gui-act/1.png",
+    "res/Art/Crops/Gui-act/2.png",
+    "res/Art/Crops/Gui-act/4.png",
+    "res/Art/Crops/Gui-act/5.png",
+
+
+
+    "res/Art/Crops/animation/caroot/caroot.plist",
+    "res/Art/Crops/animation/caroot/caroot.png"
+
 ];
 
-
-
-//
-var ress = {
-    //background: "res/img/background.png",
-    //ship: "res/img/ship.png",
-    //particle: "res/img/particle.png",
-    //asteroid: "res/img/asteroid.png",
-    //
-    //background_jpg: "res/img/background.jpg",
-    //
-
-
-    ///////////
-    cropconfig: "src/modules/config/json/cropconfig.json",
-    ////////////////
-
-
-
-    caroot: "res/Art/Crops/Field/caroot.png",
-    corn: "res/Art/Crops/Field/corn.png",
-    crops: "res/Art/Crops/Field/crops.png",
-    sausages: "res/Art/Crops/Field/dau.png",
-    mia: "res/Art/Crops/Field/mia.png",
-
-    caroot_null: "res/Art/Crops/Gui-act/hethat/icon/carrot.png",
-    corn_null: "res/Art/Crops/Gui-act/hethat/icon/corn.png",
-    crops_null: "res/Art/Crops/Gui-act/hethat/icon/carrot.png",
-    sausages_null: "res/Art/Crops/Gui-act/hethat/icon/sausages.png",
-    mia_null: "res/Art/Crops/Gui-act/hethat/icon/mia.png",
-
-
-
-
-    field: "res/Art/Crops/Field/field.png",
-
-
-    liem: "res/Art/Tool/liem.png",
-
-    popup1: "res/Art/Crops/Gui-act/1.png",
-    popup2: "res/Art/Crops/Gui-act/2.png",
-    popup4: "res/Art/Crops/Gui-act/4.png",
-    popup5: "res/Art/Crops/Gui-act/5.png",
-
-
-    //plant animation
-    caroot_plist: "res/Art/Crops/animation/caroot/caroot.plist",
-    caroot_png: "res/Art/Crops/animation/caroot/caroot.png",
-
-
-
-
-
-
-    helloBG_png : "res/res/helloBG.png",
-    start_n_png : "res/res/start_n.png",
-    start_s_png : "res/res/start_s.png",
-    PlayBG_png  : "res/res/PlayBG.png",
-    runner_png  : "res/res/running.png",
-    runner_plist : "res/res/running.plist",
-    map_png : "res/res/map.png",
-    map00_tmx : "res/res/map00.tmx",
-    map01_tmx : "res/res/map01.tmx",
-    background_png :"res/res/background.png",
-    background_plist : "res/res/background.plist",
-    restart_n_png : "res/res/restart_n.png",
-    restart_s_png : "res/res/restart_s.png"
-
-};
-
-for (var i in ress) {
-    g_resources.push(ress[i]);
+for (var k in MapResource) {
+    res[k] = MapResource[k];
 }
+
+g_resources = g_resources.concat(g_MapResource);

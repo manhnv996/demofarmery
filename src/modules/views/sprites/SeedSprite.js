@@ -47,7 +47,7 @@ var SeedSprite = cc.Sprite.extend({
                     target.removeAllChildrenWithCleanup(true);  //remove all child
 
 
-                    // target.opacity = 180;
+                    target.opacity = 180;
                     return true;
                 }
 
@@ -57,8 +57,8 @@ var SeedSprite = cc.Sprite.extend({
 
                 var delta = touch.getDelta();
 
-                this.x += delta.x / lstScale;
-                this.y += delta.y / lstScale;
+                this.x += delta.x / MapLayer.instance.scale;
+                this.y += delta.y / MapLayer.instance.scale;
                 //this.x = x / lstScale;
                 //this.y = y / lstScale;
 
@@ -79,11 +79,11 @@ var SeedSprite = cc.Sprite.extend({
 
 
 
-                var seedBoundingBox = this.getBoundingBox();
-                if (cc.rectIntersectsRect(seedBoundingBox, runnerBoundingBox)){
-                    //cc.log("va chạm");
+                //var seedBoundingBox = this.getBoundingBox();
+                //if (cc.rectIntersectsRect(seedBoundingBox, runnerBoundingBox)){
+                //    //cc.log("va chạm");
                     PlantCtrl.instance.onDragSeed(seedType, this.x, this.y);
-                }
+                //}
 
 
             }.bind(this),
@@ -92,6 +92,7 @@ var SeedSprite = cc.Sprite.extend({
                 cc.log("sprite onTouchesEnded.. ");
 
                 var target = event.getCurrentTarget();
+                target.opacity = 255;
                 target.removeFromParent(true);
 
                 // parent.popupItemSelected = null;

@@ -47,6 +47,9 @@
  *
  */
 var gv = gv || {};
+cc.json = function(obj) {
+    return cc.log(JSON.stringify(obj, null, 2));
+}
 
 var user;
 
@@ -76,36 +79,14 @@ cc.game.onStart = function () {
         gv.gameClient = new GameClient();
         gv.poolObjects = new PoolObject();
         testnetwork.connector = new testnetwork.Connector(gv.gameClient);
-
-        //fr.view(ScreenMenu);
-        //fr.view(MyScene);
-        fr.view(MapScene);
+		cc.director.runScene(new MainScene());
 
 
-
-
-        cc.log("seedLevel" + getSeedLevel(3));
-        //var str = [];
-        //cc.loader.loadJson('src/modules/config/json/cropconfig.json',function(error, data){
-        //    str = data
-        //    cc.log("data " + str);// data is the json object
-        //});
-
-
-        //var currentdate = new Date();
-        //currentdate.setHours(3, 50, 40);
-        //
-        //var field1 = new Field(new Coordinate(12, 12), 'field01');
-        //field1.setPlantType(ProductTypes.CROP_CARROT);
-        //field1.setPlantedTime(currentdate);
-        //field1.getCropTime();
-        //
-        //cc.log(field1.checkStatus());
 
 
         ////    TEST//
         ////     var field = new Field();
-        var foodStorage = new Storages(new Coordinate(10, 10), initt.foodStorage.storageId, initt.foodStorage.capacity);
+        var foodStorage = new Storages(new Coordinate(10, 10), "foodStorage", 50);
         //var warehouse = new Storages(new Coordinate(15, 10), initt.warehouse.storageId, initt.warehouse.capacity);
 
         foodStorage.addItem(ProductTypes.CROP_CARROT, 10);
@@ -118,26 +99,22 @@ cc.game.onStart = function () {
 
         var currentdate = new Date();
         currentdate.setHours(3, 50, 40);
-        for (var i = 0; i < 6; i++){
-            var field = new Field(new Coordinate(300 - i * 20, 300 - i * 20), i);
-            if (i % 2 == 0){
-                //field.setPlantType(ProductTypes.CROP_CARROT.TYPE);
+        for (var i = 0; i < 2; i++){
+            var field = new Field(new Coordinate(25, 25 + i), i);
 
-                //field.setPlantedTime(currentdate);
-            }
             asset.addField(field);
         }
 ///////////////
-        var item = user.getAsset().getFoodStorage().getItemList();
-        var str = "FoodStorage: " + user.getAsset().getFoodStorage().getCurrentQuantity() + "/ " + user.getAsset().getFoodStorage().getCapacity() + "\n";
-        for (var _i = 0; _i < item.length; _i++){
-            //cc.log(item[_i].getTypeItem().TYPE);
-            cc.log(item[_i].getTypeItem());
-            cc.log(item[_i].getQuantityItem());
-            //str += "TYPE: " + item[_i].getTypeItem().TYPE + ", quantity: " + item[_i].getQuantityItem() + "\n";
-            str += "TYPE: " + item[_i].getTypeItem() + ", quantity: " + item[_i].getQuantityItem() + "\n";
-        }
-        MapLayer.instance.label1.setString(str);
+//        var item = user.getAsset().getFoodStorage().getItemList();
+//        var str = "FoodStorage: " + user.getAsset().getFoodStorage().getCurrentQuantity() + "/ " + user.getAsset().getFoodStorage().getCapacity() + "\n";
+//        for (var _i = 0; _i < item.length; _i++){
+//            //cc.log(item[_i].getTypeItem().TYPE);
+//            cc.log(item[_i].getTypeItem());
+//            cc.log(item[_i].getQuantityItem());
+//            //str += "TYPE: " + item[_i].getTypeItem().TYPE + ", quantity: " + item[_i].getQuantityItem() + "\n";
+//            str += "TYPE: " + item[_i].getTypeItem() + ", quantity: " + item[_i].getQuantityItem() + "\n";
+//        }
+//        MapLayer.instance.label1.setString(str);
 /////////////////
 
 
@@ -149,83 +126,6 @@ cc.game.onStart = function () {
 
 
 
-
-        //
-        //
-        //cc.log(ProductTypes.CROP_CORN);
-        //cc.log(user.getAsset().getFoodStorage().getQuantity(ProductTypes.CROP_CORN));
-        //cc.log(user.getAsset().getFoodStorage().getCapacity());
-        //cc.log(user.getAsset().getFoodStorage().getCurrentQuantity());
-        //
-        //
-
-        //var currentdate = new Date();
-        //var comparedate = currentdate;
-        //comparedate.setHours(3, 50, 40);
-        //var intt = comparedate.getTime();
-        //comparedate.setTime(intt + 8100 * 1000);
-        //cc.log(comparedate);
-
-        // currentdate.setMonth(5, 15);
-        // cc.log(currentdate);
-        // cc.log(currentdate.getHours() + ": "
-        //     + currentdate.getMinutes() + ": "
-        //     + currentdate.getSeconds());
-
-        //var field1 = new Field(new Coordinate(12, 12), 'field01');
-        //asset.addField(field1);
-        //
-        //// cc.log(user.getAsset().getFieldList()[0].checkStatus());
-        //
-        //cc.log(user.getAsset().getFieldList()[0].crop());
-        //
-        //// cc.log(user.getAsset().getFoodStorage().takeItem(ProductTypes.CROP_CORN.TYPE, 3));
-        //cc.log(user.getAsset().getFoodStorage().getCurrentQuantity());
-        //
-        //// user.addExp(this.plantType.EXP);
-        //cc.log("X: " + user.getAsset().getFieldList()[0].getCoordinate().getCurrX());
-        //
-        //cc.log(user._test = 55);
-        //cc.log("get " + user._test);
-        ////cc.log(user.addExp(4));
-        ////cc.log("get " + user._test);
-
-
     }, this);
 };
 cc.game.run();
-
-
-
-//cc.game.onStart = function () {
-//    if (!cc.sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
-//        document.body.removeChild(document.getElementById("cocosLoading"));
-//
-//    // Pass true to enable retina display, disabled by default to improve performance
-//    cc.view.enableRetina(false);
-//    // Adjust viewport meta
-//    cc.view.adjustViewPort(true);
-//    cc.loader.resPath = "ress";
-//    cc.LoaderScene.preload(game_resources, function () {
-//        //hide fps
-//        cc.director.setDisplayStats(true);
-//        fr.clientConfig.init();
-//        // Setup the resolution policy and design resolution size
-//        cc.view.setDesignResolutionSize(fr.clientConfig.getDesignResolutionSize().width, fr.clientConfig.getDesignResolutionSize().height, cc.ResolutionPolicy.SHOW_ALL);
-//        // The game will be resized when browser size change
-//        cc.view.resizeWithBrowserSize(true);
-//        //update config resource
-//        fr.clientConfig.detectResourceFromScreenSize();
-//        if(cc.sys.isNative) {
-//            cc.view.setContentScaleFactor(fr.clientConfig.getResourceScale());
-//        }
-//        fr.clientConfig.updateResourceSearchPath();
-//        gv.gameClient = new GameClient();
-//        gv.poolObjects = new PoolObject();
-//        testnetwork.connector = new testnetwork.Connector(gv.gameClient);
-//
-//        //fr.view(ScreenMenu);
-//        fr.view(gameScene);
-//    }, this);
-//};
-//cc.game.run();
