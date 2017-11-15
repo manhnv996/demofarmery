@@ -46,8 +46,8 @@ var CropToolSprite = cc.Sprite.extend({
                 if (delta.x / lstScale > 0.01 || delta.y / lstScale > 0.01){
                     parent.popupItemList.shift();
 
-                    parent.disVisiblePopup(null);
-                    // parent.disVisiblePopupBackground();
+                    parent.disablePopup(null);
+                    // parent.disablePopupBackground();
                 }
 
                 // cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
@@ -60,13 +60,10 @@ var CropToolSprite = cc.Sprite.extend({
 
 
 
-
                 //var toolBoundingBox = this.getBoundingBox();
                 //if (cc.rectIntersectsRect(toolBoundingBox, runnerBoundingBox)){
-                //    //cc.log("va chạm");
                 //    PlantCtrl.instance.onDragCropTool(this.x, this.y);
                 //}
-
 
             }.bind(this),
 
@@ -80,7 +77,7 @@ var CropToolSprite = cc.Sprite.extend({
 
                 target.removeFromParent(true);
 
-                parent.disVisiblePopup(null);
+                parent.disablePopup(null);
             }
         });
         cc.eventManager.addListener(dragListener, this);

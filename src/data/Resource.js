@@ -54,9 +54,15 @@ var res = {
     popup5: "res/Art/Crops/Gui-act/5.png",
 
 
+    slot: "res/Art/Crops/Gui-act/slot.png",
+    tooltip: "res/Art/Crops/Gui-act/tooltip.png",
+    ten: "res/Art/Crops/Gui-act/ten.png",
+
+
 
     progressbar: "res/Art/Main Gui/exp-111.png",
     progress: "res/Art/Main Gui/exp-221.png",
+    btBoost: "res/Art/Main Gui/button-energy2.png",
 
 
     //plant animation

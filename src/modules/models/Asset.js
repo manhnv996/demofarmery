@@ -60,8 +60,10 @@ var Asset = cc.Class.extend({
         return null;
     },
     addField: function (field) {
-        //bug
+        //bug   // ? where??
         this.fieldList.push(field);
+
+        this.fieldList[this.fieldList.length - 1].setFieldId(this.fieldList.length - 1);    //autoincrement id
 
     },
 

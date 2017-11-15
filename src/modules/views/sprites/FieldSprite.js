@@ -6,13 +6,18 @@
 var FieldSprite = MapBlockSprite.extend({
 
     fieldId: null,
-    animFrames: [],
-    animation: null,
 
     plantSprite: null,
     seedType: null,
 
-    // ctor: function(parent, fieldId, seed_plist_img, seed_plist) {
+    //
+    popupBackground: null,
+    popupItemList: [],
+    fieldList: [],
+
+    isShowProgressBar: false,
+
+
     ctor: function(parent, fieldId, x, y) {
         //this._super();
         this._super(res.field, 1, 1, x, y);
@@ -21,7 +26,6 @@ var FieldSprite = MapBlockSprite.extend({
         //this.initWithFile(seed_plist_img);
 
         //
-        // this.render(fieldId, seed_plist_img, seed_plist);
         this.render(fieldId);
 
 
@@ -30,25 +34,11 @@ var FieldSprite = MapBlockSprite.extend({
 
 ///////////
         this.schedule(this.updateFieldStatus, 0.5);
-
+        this.schedule(this.updateProgressBarInprogress, 0.2);
 
     },
     render: function (fieldId) {
         this.fieldId = fieldId;
-
-        //this.plantSprite = fr.createAnimationById(resAniId.Carot, this);
-        // this.addChild(carootCan);
-        // carootCan.getAnimation().setTimeScale(0.5);
-        // carootCan.setPosition(cc.p(cc.winSize.width / 2, cc.winSize.height / 2));
-        // carootCan.gotoAndPlay('idle', -1);
-
-
-        //this.plantSprite = new cc.Sprite(res.field);
-        //
-        //this.addChild(this.plantSprite);
-
-
-        //this.plantSprite.getAnimation().gotoAndPlay("Carot_Harvest",-1, 5, 0);
 
     },
 
@@ -69,7 +59,7 @@ var FieldSprite = MapBlockSprite.extend({
     //
     // },
 
-    //
+
     //
     addTouchEventListener: function (parent, fieldId) {
 
@@ -174,10 +164,11 @@ var FieldSprite = MapBlockSprite.extend({
 
             this.plantSprite = fr.createAnimationById(getResAniIdBySeedType(seedType), this);
 
+            // this.plantSprite.setPosition(cc.p(0 + 6, this.height + 12));
             this.plantSprite.setPosition(cc.p(0, this.height));
             this.addChild(this.plantSprite);
-            this.plantSprite.getAnimation().setTimeScale(0.5);
-            this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.plantAni,-1, -1, 1);
+            // this.plantSprite.getAnimation().setTimeScale(1);
+            this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.plantAni, -1, -1, 1);
 
         }
     },
@@ -221,7 +212,6 @@ var FieldSprite = MapBlockSprite.extend({
         curr = currTime - parsePlantTime;
 
 
-        //if (this.fieldId != null){
         if (this.plantSprite != null){
 
             var plantTypeObj = getProductObjByType(this.seedType);
@@ -230,20 +220,19 @@ var FieldSprite = MapBlockSprite.extend({
                 //
                 //this.changeTexture(getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType()).growImg4);
 
-
                 this.plantSprite.getAnimation().setTimeScale(0.5);
-                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow4,-1, -1, 1);
+                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow3,-1, -1, 1);
             } else if (curr >= duration * 3 / 4) {
                 //
                 this.plantSprite.getAnimation().setTimeScale(0.5);
-                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow3,-1, -1, 1);
+                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow2,-1, -1, 1);
             } else if (curr >= duration / 2) {
                 this.plantSprite.getAnimation().setTimeScale(0.5);
-                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow2,-1, -1, 1);
+                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow1,-1, -1, 1);
 
             } else if(curr >= duration * 1 / 4){
                 this.plantSprite.getAnimation().setTimeScale(0.5);
-                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow1,-1, -1, 1);
+                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.plantAni,-1, -1, 1);
 
             } else {    // < / 2
                 this.plantSprite.getAnimation().setTimeScale(0.5);
@@ -254,21 +243,64 @@ var FieldSprite = MapBlockSprite.extend({
 
     },
 
+    updateProgressBarInprogress: function () {
+
+        if (this.isShowProgressBar){
+            var parsePlantTime = user.getAsset().getFieldList()[this.fieldId].getPlantedTime().getTime();
+            var parseCropTime = user.getAsset().getFieldList()[this.fieldId].getCropTime().getTime();
+            var currTime = new Date().getTime();
+
+            var duration = parseCropTime - parsePlantTime;
+            var curr = currTime - parsePlantTime;
+
+            if (curr > duration){
+                this.isShowProgressBar = false;
+
+                this.disableProgressBarInprogress();
+                return false;
+            }
+
+            this.progress.setScale(curr / duration, 1);
+            this.progress.setPositionX(this.progressBar.width / 2 + 28 - 180 + this.progress.getScaleX() * 180);
+
+            //
+            var remain = new Date();
+            remain.setTime(duration - curr);
+            var timeRemainShow = remain.getMinutes() + ": " + remain.getSeconds();
+            this.timeRemain.setString(timeRemainShow);
+
+        }
+    },
+
     showProgressBarInprogress: function () {
-        //this.disVisiblePopup(null);
+        //this.disablePopup(null);
 
         this.disableProgressBarInprogress();
 
 
         this.progressBar = cc.Sprite.create(res.progressbar);
         this.progressBar.setPosition(0, this.height);
+        this.progressBar.setScale(0.5);
         this.addChild(this.progressBar);
 
 
-        var progress = cc.Sprite.create(res.progress);
-        progress.setScale(0, 1);
-        progress.setPosition(0, this.progressBar.height / 2);
-        this.progressBar.addChild(progress);
+        this.progress = cc.Sprite.create(res.progress);
+        this.progress.setScale(0, 1);
+        this.progress.setPosition(this.progressBar.width / 2 + 28 - 148, this.progressBar.height / 2);
+        this.progressBar.addChild(this.progress);
+
+
+        // time remain
+        this.timeRemain = new cc.LabelTTF("", "res/fonts/eff_number.fnt", 32);
+        this.timeRemain.setPosition(cc.p(this.progressBar.width / 2, this.progressBar.height));
+        // this.timeRemain.setPosition(cc.p(0, 0));
+        this.progressBar.addChild(this.timeRemain);
+
+
+        // button boost
+        var btBoost = new ccui.Button(res.btBoost);
+        btBoost.setPosition(cc.p(this.progressBar.width, this.progressBar.height / 2));
+        this.progressBar.addChild(btBoost);
 
 
         //
@@ -277,31 +309,226 @@ var FieldSprite = MapBlockSprite.extend({
             return false;
         }
 
-        var parsePlantTime = user.getAsset().getFieldList()[this.fieldId].getPlantedTime().getTime();
-        var parseCropTime = user.getAsset().getFieldList()[this.fieldId].getCropTime().getTime();
-        var currTime = new Date().getTime();
-
-        var duration = parseCropTime - parsePlantTime;
-        var curr = currTime - parsePlantTime;
-
-        progress.setScale((1 + curr) / duration, 1);
-
-
-        /*
-        BUGGGG
-         */
-        progress.setPositionX(this.progressBar.width / 2 - (1 - ((1 + curr) / duration)) * progress.getScaleX() * this.progressBar.width / 2);
+        this.isShowProgressBar = true;
 
     },
     disableProgressBarInprogress: function () {
+
+        this.isShowProgressBar = false;
+
         if (this.progressBar != null){
-            if (this.progressBar.isVisible()){
+            // if (this.progressBar.isVisible()){
                 this.progressBar.setVisible(false);
 
                 this.progressBar = null;
-            }
+            // }
 
         }
-    }
+    },
+
+
+
+
+    ///////////////////////
+    showSeedPopup: function(fieldId, seedList){
+        //cc.log("showPopup");
+
+        this.disablePopup(null);
+
+
+        this.popupItemList = [];
+
+        //
+        if (seedList != null){
+
+            if (seedList.length > 3){
+                this.popupBackground = new cc.Sprite(res.popup5);
+            } else if (seedList.length == 3){
+                this.popupBackground = new cc.Sprite(res.popup4);
+            } else {
+                this.popupBackground = new cc.Sprite(res.popup2)
+            }
+
+
+            this.popupBackground.setPosition(- this.width / 4, this.height * 3 / 2);
+            this.addChild(this.popupBackground);
+
+
+            //
+            for (var i = 0; i < seedList.length; i++){
+
+                var seed_type = seedList[i].getTypeItem();
+
+
+                var seed_img = getSeedImgBySeedTypeAndQuantity(seed_type, seedList[i].getQuantityItem());
+
+                var seed = new SeedSprite(this, seed_img, seed_type);
+                seed.quantity = seedList[i].getQuantityItem();
+
+
+                seed.setPosition(cc.p(this.popupBackground.x, this.popupBackground.y));
+
+                /////
+                seed.addQuantityInfo();
+
+
+
+                this.popupItemList.push(seed);
+                this.addChild(seed);
+            }
+
+
+            //setPosition
+            switch (seedList.length){
+                case 1:
+
+                    break;
+                case 2:
+                    this.popupItemList[0].runAction(new cc.moveBy(0.1, - (this.popupItemList[0].width / 2), 0));
+                    this.popupItemList[1].runAction(new cc.moveBy(0.1, (this.popupItemList[1].height / 2), 0));
+                    break;
+                case 3:
+                    this.popupItemList[0].runAction(new cc.moveBy(0.1, - (this.popupItemList[0].width), 0));
+                    // this.popupItemList[1].runAction(new cc.moveBy(0.1, (this.popupItemList[1].height / 2), 0));
+                    this.popupItemList[2].runAction(new cc.moveBy(0.1, (this.popupItemList[2].width), 0));
+
+                    break;
+                case 4:
+                    this.popupItemList[0].runAction(new cc.moveBy(0.1, - (this.popupItemList[0].width), (this.popupItemList[0].height / 2)));
+                    this.popupItemList[1].runAction(new cc.moveBy(0.1, 0, (this.popupItemList[1].height / 2)));
+                    this.popupItemList[2].runAction(new cc.moveBy(0.1, (this.popupItemList[2].width), (this.popupItemList[1].height / 2)));
+
+                    this.popupItemList[3].runAction(new cc.moveBy(0.1, - (this.popupItemList[3].width / 2), - (this.popupItemList[3].height / 2)));
+
+                    break;
+                case 5:
+                    this.popupItemList[0].runAction(new cc.moveBy(0.1, - (this.popupItemList[0].width), (this.popupItemList[0].height / 2)));
+                    this.popupItemList[1].runAction(new cc.moveBy(0.1, 0, (this.popupItemList[1].height / 2)));
+                    this.popupItemList[2].runAction(new cc.moveBy(0.1, (this.popupItemList[2].width), (this.popupItemList[1].height / 2)));
+
+                    this.popupItemList[3].runAction(new cc.moveBy(0.1, - (this.popupItemList[3].width / 2), - (this.popupItemList[3].height / 2)));
+                    this.popupItemList[4].runAction(new cc.moveBy(0.1, + (this.popupItemList[3].width / 2), - (this.popupItemList[3].height / 2)));
+
+                    break;
+
+                default:
+                    var temp = Math.floor(this.popupItemList.length / 2);
+                    for (var i = 0; i < this.popupItemList.length; i++){
+                        if (i < temp + 1){
+                            this.popupItemList[i].runAction(new cc.moveBy(0.1, - (Math.pow(-1, i)) * (temp - i - 1) * (this.popupItemList[i].width), (this.popupItemList[i].height / 2)));
+                        } else {
+                            this.popupItemList[i].runAction(new cc.moveBy(0.1, + (Math.pow(-1, i)) * (temp * 2 - i) * (this.popupItemList[i].width) + (this.popupItemList[i].width / 2), - (this.popupItemList[i].height / 2)));
+                        }
+                    }
+
+            }
+
+
+
+        } else {
+            this.popupBackground = cc.Sprite.create(res.popup2);
+            this.popupBackground.setPosition(- this.width / 4, this.height * 3 / 2);
+            this.addChild(this.popupBackground);
+//
+            var index = this.getIndexOfFieldList(fieldId);
+            //cc.log("index = " + index);
+            if (index != null) {
+                this.popupBackground.setPosition(this.fieldList[index].x - this.fieldList[index].width / 1.5, this.fieldList[index].y + this.fieldList[index].height / 1.5);
+            }
+        }
+
+    },
+
+    showToolPopup: function(fieldId){
+        //cc.log("showPopup");
+
+        this.disablePopup(null);
+
+
+        this.popupBackground = cc.Sprite.create(res.popup2);
+        this.popupBackground.setPosition(- this.width / 8, this.height * 4 / 3);
+        this.addChild(this.popupBackground);
+
+
+        var tool = new CropToolSprite(this, res.liem);
+
+        tool.setPosition(cc.p(this.popupBackground.x, this.popupBackground.y));
+
+
+        this.popupItemList = [];
+        this.popupItemList.push(tool);
+        this.addChild(tool);
+
+    },
+
+    disablePopup: function(seedId){
+        //cc.log("disvisible");
+        this.disablePopupBackground();
+
+        this.disVisibleItemOfPopup(seedId);
+
+    },
+
+    //
+    disablePopupBackground: function () {
+
+        if (this.popupBackground != null) {
+            // if (this.popupBackground.isVisible()) {
+                this.popupBackground.setVisible(false);
+
+                this.popupBackground = null;
+            // }
+
+        }
+//
+    },//
+    disVisibleItemOfPopup: function(seedId){
+        var index = this.getIndexSeedOfPopupItemList(seedId);
+        if (index == null){
+            for (var i = 0; i < this.popupItemList.length; i++){
+                if (this.popupItemList[i] != null){
+                    if (this.popupItemList[i].isVisible()){
+                        this.popupItemList[i].setVisible(false);
+
+                    }
+
+                }
+            }
+            this.popupItemList = [];
+        } else {
+            for (var i = 0; i < this.popupItemList.length; i++){
+                if (index != i){
+                    if (this.popupItemList[i] != null){
+                        if (this.popupItemList[i].isVisible()){
+                            this.popupItemList[i].setVisible(false);
+
+                        }
+
+                    }
+
+                }
+            }
+            this.popupItemList = [];
+
+        }
+
+    },
+    getIndexSeedOfPopupItemList: function (seedId) {
+        if (seedId == null){    //
+            if (this.popupItemList.length == 1){
+                if (!this.popupItemList[0].seedType){    //tool
+                    // return 0;
+                }
+            }
+            return null;
+        }
+        for (var i = 0; i < this.popupItemList.length; i++){    //seed list
+            if (this.popupItemList[i].seedType == seedId){
+                return i;
+            }
+        }
+        return null;
+    },
+
 
 });

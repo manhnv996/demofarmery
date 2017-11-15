@@ -14,86 +14,97 @@ var PlantCtrl = cc.Class.extend({
          show popup view (seed / or croptool) IN MAPVIEW
          */
         var fieldSelected = user.getAsset().getFieldById(fieldId);
-        var status = fieldSelected.checkStatus();
 
-        if (status == FieldStatusTypes.EMPTY){
-            /*
-            Show seedtable
-             */
-            //var seedList = [
-            //    {seedType: ProductTypes.CROP_CARROT},
-            //    {seedType: ProductTypes.CROP_WHEAT},
-            //    {seedType: ProductTypes.CROP_CORN},
-            //    // {seedType: ProductTypes.CROP_SUGARCANE},
-            //    // {seedType: ProductTypes.CROP_SOYBEAN}
-            //];
+        if (fieldSelected != null){
+
+            var status = fieldSelected.checkStatus();
 
 
-            var seedList = user.getAsset().getFoodStorage().getItemList();
+            if (status == FieldStatusTypes.EMPTY){
+                /*
+                Show seedtable
+                 */
+                //var seedList = [
+                //    {seedType: ProductTypes.CROP_CARROT},
+                //    {seedType: ProductTypes.CROP_WHEAT},
+                //    {seedType: ProductTypes.CROP_CORN},
+                //    // {seedType: ProductTypes.CROP_SUGARCANE},
+                //    // {seedType: ProductTypes.CROP_SOYBEAN}
+                //];
 
-            var seedLevel = getSeedLevel(user.getLevel());
 
-            var seedShow = [];
-            for (var i = 0; i < seedLevel.length; i++){
-                if (user.getAsset().getFoodStorage().getQuantity(seedLevel[i]) == 0){
-                    if (getProductObjByType(seedLevel[i]).level <= user.getLevel()){
-                        seedShow.push(new StorageItem(seedLevel[i], 0));
-                    } else {
-                        seedShow.push(new StorageItem(seedLevel[i], null));
+                var seedList = user.getAsset().getFoodStorage().getItemList();
+
+                var seedLevel = getSeedLevel(user.getLevel());
+
+                var seedShow = [];
+                for (var i = 0; i < seedLevel.length; i++){
+                    if (user.getAsset().getFoodStorage().getQuantity(seedLevel[i]) == 0){
+                        if (getProductObjByType(seedLevel[i]).level <= user.getLevel()){
+                            seedShow.push(new StorageItem(seedLevel[i], 0));
+                        } else {
+                            seedShow.push(new StorageItem(seedLevel[i], null));
+                        }
                     }
                 }
+                for (var i = 0; i < seedList.length; i++){
+                    seedShow.push(new StorageItem(seedList[i].getTypeItem(), seedList[i].getQuantityItem()));
+                }
+
+
+
+                MapLayer.instance.showSeedPopup(fieldId, seedShow);
+                cc.log("empty");
+
+            } else if (status == FieldStatusTypes.DONE){
+                /*
+                Show croptool
+                 */
+                MapLayer.instance.showToolPopup(fieldId);
+                cc.log("done");
+
+            } else {
+                /*
+                Show status
+                 */
+                MapLayer.instance.showProgressBar(fieldId);
+
+                cc.log("inprogress");
             }
-            for (var i = 0; i < seedList.length; i++){
-                seedShow.push(new StorageItem(seedList[i].getTypeItem(), seedList[i].getQuantityItem()));
-            }
 
 
-
-            MapLayer.instance.showSeedPopup(fieldId, seedShow);
-            cc.log("empty");
-
-        } else if (status == FieldStatusTypes.DONE){
-            /*
-            Show croptool
-             */
-            MapLayer.instance.showToolPopup(fieldId);
-            cc.log("done");
-
-        } else {
-            /*
-            Show status
-             */
-            MapLayer.instance.showProgressBar(fieldId);
-
-            cc.log("inprogress");
         }
+
 
     },
     onDragCropTool: function(x, y) {
         //
         var fieldSelected = MapCtrl.instance.getField(x, y);
 
-        var status = fieldSelected.checkStatus();
+        if (fieldSelected != null){
 
-        if (status == FieldStatusTypes.DONE){
-            //
-            var seedType = fieldSelected.getPlantType();
+            var status = fieldSelected.checkStatus();
 
-            if (fieldSelected.crop() == null){  //crop and check crop fail
 
-                //full foodStorage
-                /*
-                 FLOW UpgradeStorage
-                 */
-            } else {
-                //send msg to server {packet{fieldId, productType}}
+            if (status == FieldStatusTypes.DONE){
+                //
+                var seedType = fieldSelected.getPlantType();
+
+                if (fieldSelected.crop() == null){  //crop and check crop fail
+
+                    //full foodStorage
+                    /*
+                     FLOW UpgradeStorage
+                     */
+                } else {
+                    //send msg to server {packet{fieldId, productType}}
 ////////
-                testnetwork.connector.sendCrop(fieldSelected.getFieldId(), seedType);
+                    testnetwork.connector.sendCrop(fieldSelected.getFieldId(), seedType);
 /////
 
-                //animation
-                // MapLayer.instance.runAnimationCrop(1, "caroot", 0.2, fieldSelected.getFieldId());
-                 MapLayer.instance.runAnimationCrop(fieldSelected.getFieldId(), seedType);
+                    //animation
+                    // MapLayer.instance.runAnimationCrop(1, "caroot", 0.2, fieldSelected.getFieldId());
+                    MapLayer.instance.runAnimationCrop(fieldSelected.getFieldId(), seedType);
 
 
 ///////////////
@@ -106,16 +117,20 @@ var PlantCtrl = cc.Class.extend({
 //                }
 //                MapLayer.instance.label1.setString(str);
 ////////////
+                }
+
+                ////send msg to server {packet{fieldId, productType}}
+                //testnetwork.connector.sendCrop(fieldSelected.getFieldId(), fieldSelected.getPlantType());
+
+            } else {
+                /*
+                 DO NOTHING
+                 */
             }
 
-            ////send msg to server {packet{fieldId, productType}}
-            //testnetwork.connector.sendCrop(fieldSelected.getFieldId(), fieldSelected.getPlantType());
 
-        } else {
-            /*
-             DO NOTHING
-             */
         }
+
     },
     onDragSeed: function(seedType, x, y) {
         //
@@ -129,6 +144,9 @@ var PlantCtrl = cc.Class.extend({
                 //
                 //fieldSelected.plant(seedType);
                 if (fieldSelected.plant(seedType)){     //plant and if success
+
+
+
                     //send msg to server {packet{fieldId, productType}}
 ////////
                 testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
