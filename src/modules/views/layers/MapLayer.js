@@ -353,8 +353,10 @@ var MapLayer = (function() {
 					var target = event.getCurrentTarget();
 					cc.log("sprite onTouchesEnded.. ");
 					//
+
 					// target.disVisiblePopup(this.popupItemSelected);
 					target.disVisiblePopup(null);
+					target.disableProgressBar();
 
 
 				}
@@ -551,6 +553,10 @@ var MapLayer = (function() {
 
 					var seed = new SeedSprite(this, seed_img, seed_type);
 
+					seed.quantity = seedList[i].getQuantityItem();
+
+					//cc.log("quantity: " + i + " ss " + seedList[i].getQuantityItem());
+
 
 					seed.setPosition(cc.p(this.popupBackground.x, this.popupBackground.y));
 
@@ -703,6 +709,8 @@ var MapLayer = (function() {
 			if (this.popupBackground != null) {
 				if (this.popupBackground.isVisible()) {
 					this.popupBackground.setVisible(false);
+
+					this.popupBackground = null;
 				}
 
 			}
@@ -735,6 +743,24 @@ var MapLayer = (function() {
 				}
 			}
 			return null;
+		},
+
+
+		//
+		showProgressBar: function (fieldId) {
+			var index = this.getIndexOfFieldList(fieldId);
+			if (index != null){
+				this.fieldList[index].showProgressBarInprogress();
+			}
+		},
+		disableProgressBar: function () {
+			//var index = this.getIndexOfFieldList(fieldId);
+			//if (index != null){
+			//	this.fieldList[index].disableProgressBar();
+			//}
+			for (var i = 0; i < this.fieldList.length; i++){
+				this.fieldList[i].disableProgressBarInprogress();
+			}
 		},
 		//
 		disVisibleItemOfPopup: function(seedId){

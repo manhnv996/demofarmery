@@ -52,8 +52,8 @@ var CropToolSprite = cc.Sprite.extend({
 
                 // cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
 
-                // //Call ctrl
-                // PlantCtrl.instance.onDragCropTool(this.x, this.y);
+                 //Call ctrl
+                 PlantCtrl.instance.onDragCropTool(this.x, this.y);
                 /*
                 INPROGRESS
                  */
@@ -64,7 +64,7 @@ var CropToolSprite = cc.Sprite.extend({
                 //var toolBoundingBox = this.getBoundingBox();
                 //if (cc.rectIntersectsRect(toolBoundingBox, runnerBoundingBox)){
                 //    //cc.log("va chạm");
-                    PlantCtrl.instance.onDragCropTool(this.x, this.y);
+                //    PlantCtrl.instance.onDragCropTool(this.x, this.y);
                 //}
 
 

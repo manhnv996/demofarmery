@@ -11,8 +11,8 @@ gv.CMD.MOVE = 2001;
 
 
 //
-gv.CMD.PLANT = 2011;
-gv.CMD.CROP = 2012;
+gv.CMD.PLANT = 5001;
+gv.CMD.CROP = 5002;
 
 
 gv.CMD.CHECK_STATUS_FIELD = 2091;
@@ -139,7 +139,7 @@ CmdSendPlant = fr.OutPacket.extend(
 
             this.putShort(fieldId);
             // this.putShort(productType);
-            this.putString(JSON.stringify(productType));
+            this.putString(productType);
 
             this.updateSize();
         }
@@ -159,7 +159,7 @@ CmdSendCrop = fr.OutPacket.extend(
 
             this.putShort(fieldId);
             // this.putShort(productType);
-            this.putString(JSON.stringify(productType));
+            this.putString(productType);
 
             this.updateSize();
         }
@@ -267,6 +267,9 @@ testnetwork.packetMap[gv.CMD.PLANT] = fr.InPacket.extend(
             /*
             INPROGRESS
              */
+
+            this.t = this.getShort();
+            cc.log(this.t + " get short ");
         }
     }
 );

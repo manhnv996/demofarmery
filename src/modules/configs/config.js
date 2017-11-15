@@ -15,8 +15,9 @@ function getSeedLevel(level) {
     var seedLevelList = [];
     for (var i = 0; i < productTypeObj.length; i++) {
 
-        if (productTypeObj[i].level <= (level + 7)) {
-            seedLevelList.push(productTypeObj[i].id);
+        if (productTypeObj[i].level <= (level + 5)) {
+            //seedLevelList.push(productTypeObj[i].id);
+            seedLevelList.unshift(productTypeObj[i].id);
         }
     }
 
@@ -33,7 +34,6 @@ function getProductObjByType(productId) {
     });
 
     for (var i = 0; i < productTypeObj.length; i++) {
-
         if (productTypeObj[i].id == productId) {
             return productTypeObj[i];
         }

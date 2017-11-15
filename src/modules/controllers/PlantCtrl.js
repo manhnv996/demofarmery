@@ -36,7 +36,7 @@ var PlantCtrl = cc.Class.extend({
             var seedShow = [];
             for (var i = 0; i < seedLevel.length; i++){
                 if (user.getAsset().getFoodStorage().getQuantity(seedLevel[i]) == 0){
-                    if (getProductObjByType(seedLevel[i]).level < user.getLevel()){
+                    if (getProductObjByType(seedLevel[i]).level <= user.getLevel()){
                         seedShow.push(new StorageItem(seedLevel[i], 0));
                     } else {
                         seedShow.push(new StorageItem(seedLevel[i], null));
@@ -63,6 +63,8 @@ var PlantCtrl = cc.Class.extend({
             /*
             Show status
              */
+            MapLayer.instance.showProgressBar(fieldId);
+
             cc.log("inprogress");
         }
 
@@ -86,7 +88,7 @@ var PlantCtrl = cc.Class.extend({
             } else {
                 //send msg to server {packet{fieldId, productType}}
 ////////
-//                testnetwork.connector.sendCrop(fieldSelected.getFieldId(), fieldSelected.getPlantType());
+                testnetwork.connector.sendCrop(fieldSelected.getFieldId(), seedType);
 /////
 
                 //animation
@@ -129,7 +131,7 @@ var PlantCtrl = cc.Class.extend({
                 if (fieldSelected.plant(seedType)){     //plant and if success
                     //send msg to server {packet{fieldId, productType}}
 ////////
-//                testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
+                testnetwork.connector.sendPlant(fieldSelected.getFieldId(), fieldSelected.getPlantType());
 /////
 
                     //animation

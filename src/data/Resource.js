@@ -55,6 +55,10 @@ var res = {
 
 
 
+    progressbar: "res/Art/Main Gui/exp-111.png",
+    progress: "res/Art/Main Gui/exp-221.png",
+
+
     //plant animation
     caroot_plist: "res/Art/Crops/animation/caroot/caroot.plist",
     caroot_png: "res/Art/Crops/animation/caroot/caroot.png",

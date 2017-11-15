@@ -7,6 +7,7 @@ var SeedSprite = cc.Sprite.extend({
     data: null,
     seedType: null,
 
+    quantity: null,
 
     ctor: function(parent, seed_img, seedType) {
         this._super(seed_img);
@@ -20,6 +21,9 @@ var SeedSprite = cc.Sprite.extend({
     render: function (seedType) {
 
         this.seedType = seedType;
+
+        //
+        this.quantity = null;
     },
 
 
@@ -42,7 +46,20 @@ var SeedSprite = cc.Sprite.extend({
                     //
                     target.runAction(new cc.ScaleTo(0.1, 1.5, 1.5));
 
-                    parent.getIndexSeedOfPopupItemList(seedType);
+                    //parent.getIndexSeedOfPopupItemList(seedType);
+                    if (target.quantity == null){
+                        cc.log("quantity is null");
+
+                        target.removeAllChildrenWithCleanup(true);  //remove all child
+                        //target.removeFromParent(true);
+                        //parent.disVisiblePopup(seedType);
+                        /*
+                        INPROGRESS
+                        SHOW LEVEL UNLOCK
+                         */
+                        return false;
+                    }
+
 
 
                     target.removeAllChildrenWithCleanup(true);  //remove all child
@@ -72,8 +89,8 @@ var SeedSprite = cc.Sprite.extend({
 
                 //cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
 
-                ////Call ctrl
-                //PlantCtrl.instance.onDragSeed(seedType, this.x, this.y);
+                //Call ctrl
+                PlantCtrl.instance.onDragSeed(seedType, this.x, this.y);
                 /*
                  INPROGRESS
                  */
@@ -83,7 +100,7 @@ var SeedSprite = cc.Sprite.extend({
                 //var seedBoundingBox = this.getBoundingBox();
                 //if (cc.rectIntersectsRect(seedBoundingBox, runnerBoundingBox)){
                 //    //cc.log("va chạm");
-                    PlantCtrl.instance.onDragSeed(seedType, this.x, this.y);
+                //    PlantCtrl.instance.onDragSeed(seedType, this.x, this.y);
                 //}
 
 

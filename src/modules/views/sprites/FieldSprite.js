@@ -139,26 +139,26 @@ var FieldSprite = MapBlockSprite.extend({
     },
 
 
-    loadAnimFrames: function(num, str_seed_key, speed){
-        //cc.spriteFrameCache.addSpriteFrames(seed_plist); // sprite cache
-
-        this.animFrames = [];
-        // num equal to spriteSheet
-        for (var i = 0; i < num; i++) {
-            var str = str_seed_key + i + ".png";
-            var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            this.animFrames.push(frame);
-
-        }
-
-        this.animation = new cc.Animation(this.animFrames, speed);
-    },
-    runAnimationForever: function(){
-        this.runAction(cc.animate(this.animation).repeatForever());  //repeatForever
-    },
-    runAnimationRepeat: function(num){
-        this.runAction(cc.animate(this.animation).repeat(num));  //repeat num time
-    },
+    //loadAnimFrames: function(num, str_seed_key, speed){
+    //    //cc.spriteFrameCache.addSpriteFrames(seed_plist); // sprite cache
+    //
+    //    this.animFrames = [];
+    //    // num equal to spriteSheet
+    //    for (var i = 0; i < num; i++) {
+    //        var str = str_seed_key + i + ".png";
+    //        var frame = cc.spriteFrameCache.getSpriteFrame(str);
+    //        this.animFrames.push(frame);
+    //
+    //    }
+    //
+    //    this.animation = new cc.Animation(this.animFrames, speed);
+    //},
+    //runAnimationForever: function(){
+    //    this.runAction(cc.animate(this.animation).repeatForever());  //repeatForever
+    //},
+    //runAnimationRepeat: function(num){
+    //    this.runAction(cc.animate(this.animation).repeat(num));  //repeat num time
+    //},
 
 
     plantAnimation: function (seedType) {
@@ -252,6 +252,56 @@ var FieldSprite = MapBlockSprite.extend({
             }
         }
 
+    },
+
+    showProgressBarInprogress: function () {
+        //this.disVisiblePopup(null);
+
+        this.disableProgressBarInprogress();
+
+
+        this.progressBar = cc.Sprite.create(res.progressbar);
+        this.progressBar.setPosition(0, this.height);
+        this.addChild(this.progressBar);
+
+
+        var progress = cc.Sprite.create(res.progress);
+        progress.setScale(0, 1);
+        progress.setPosition(0, this.progressBar.height / 2);
+        this.progressBar.addChild(progress);
+
+
+        //
+        if (user.getAsset().getFieldList()[this.fieldId].getPlantedTime() == null){
+
+            return false;
+        }
+
+        var parsePlantTime = user.getAsset().getFieldList()[this.fieldId].getPlantedTime().getTime();
+        var parseCropTime = user.getAsset().getFieldList()[this.fieldId].getCropTime().getTime();
+        var currTime = new Date().getTime();
+
+        var duration = parseCropTime - parsePlantTime;
+        var curr = currTime - parsePlantTime;
+
+        progress.setScale((1 + curr) / duration, 1);
+
+
+        /*
+        BUGGGG
+         */
+        progress.setPositionX(this.progressBar.width / 2 - (1 - ((1 + curr) / duration)) * progress.getScaleX() * this.progressBar.width / 2);
+
+    },
+    disableProgressBarInprogress: function () {
+        if (this.progressBar != null){
+            if (this.progressBar.isVisible()){
+                this.progressBar.setVisible(false);
+
+                this.progressBar = null;
+            }
+
+        }
     }
 
 });

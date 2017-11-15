@@ -89,8 +89,11 @@ cc.game.onStart = function () {
         var foodStorage = new Storages(new Coordinate(10, 10), "foodStorage", 50);
         //var warehouse = new Storages(new Coordinate(15, 10), initt.warehouse.storageId, initt.warehouse.capacity);
 
-        foodStorage.addItem(ProductTypes.CROP_CARROT, 10);
+        //foodStorage.addItem(ProductTypes.CROP_CORN, 10);
+        //foodStorage.addItem(ProductTypes.CROP_CARROT, 10);
         foodStorage.addItem(ProductTypes.CROP_WHEAT, 10);
+        //foodStorage.addItem(ProductTypes.CROP_SOYBEAN, 5);
+        //foodStorage.addItem(ProductTypes.CROP_SUGARCANE, 5);
 
 
 
