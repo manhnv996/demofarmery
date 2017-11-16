@@ -34,30 +34,12 @@ var FieldSprite = MapBlockSprite.extend({
 ///////////
         this.schedule(this.updateFieldStatus, 0.5);
         //this.schedule(this.updateProgressBarInprogress, 0.2);
-        //this.schedule(PopupLayer.instance.updateProgressBarInprogress, 0.2);
 
     },
     render: function (fieldId) {
         this.fieldId = fieldId;
 
     },
-
-    // render: function(fieldId, seed_plist_img, seed_plist){
-    //     this.fieldId = fieldId;
-    //
-    //
-    //     if (seed_plist != null){
-    //         ////////////
-    //         //cc.spriteFrameCache.addSpriteFrames(res.caroot_plist, res.caroot_png); // sprite cache
-    //         cc.spriteFrameCache.addSpriteFrames(seed_plist); // sprite cache
-    //
-    //         this.animation = new cc.Animation([cc.spriteFrameCache.getSpriteFrame("field.png")], 0.1);
-    //         this.runAction(cc.animate(this.animation).repeat(1));  //repeat one time
-    //         ///////////
-    //
-    //     }
-    //
-    // },
 
 
     //
@@ -107,27 +89,6 @@ var FieldSprite = MapBlockSprite.extend({
         });
         cc.eventManager.addListener(touchListener, this);
     },
-
-    //loadAnimFrames: function(num, str_seed_key, speed){
-    //    //cc.spriteFrameCache.addSpriteFrames(seed_plist); // sprite cache
-    //
-    //    this.animFrames = [];
-    //    // num equal to spriteSheet
-    //    for (var i = 0; i < num; i++) {
-    //        var str = str_seed_key + i + ".png";
-    //        var frame = cc.spriteFrameCache.getSpriteFrame(str);
-    //        this.animFrames.push(frame);
-    //
-    //    }
-    //
-    //    this.animation = new cc.Animation(this.animFrames, speed);
-    //},
-    //runAnimationForever: function(){
-    //    this.runAction(cc.animate(this.animation).repeatForever());  //repeatForever
-    //},
-    //runAnimationRepeat: function(num){
-    //    this.runAction(cc.animate(this.animation).repeat(num));  //repeat num time
-    //},
 
 
     plantAnimation: function (seedType) {

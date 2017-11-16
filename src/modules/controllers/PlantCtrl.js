@@ -43,8 +43,6 @@ var PlantCtrl = cc.Class.extend({
                 }
 
 
-
-                //MapLayer.instance.showSeedPopup(fieldId, seedShow);
                 PopupLayer.instance.showSeedPopup(fieldId, seedShow);
                 cc.log("empty");
                 //
@@ -55,7 +53,7 @@ var PlantCtrl = cc.Class.extend({
                 /*
                 Show croptool
                  */
-                //MapLayer.instance.showToolPopup(fieldId);
+
                 PopupLayer.instance.showToolPopup(fieldId);
                 cc.log("done");
 
@@ -63,7 +61,6 @@ var PlantCtrl = cc.Class.extend({
                 /*
                 Show status
                  */
-                //MapLayer.instance.showProgressBar(fieldId);
                 PopupLayer.instance.showProgressBarInprogress(fieldId);
 
                 cc.log("inprogress");
@@ -95,9 +92,9 @@ var PlantCtrl = cc.Class.extend({
                      FLOW UpgradeStorage
                      Show Popup
                      */
-                    MapLayer.instance.showNoticeFullFoodStorageBG();
+                    // MapLayer.instance.showNoticeFullFoodStorageBG();
 
-                    MapLayer.instance.disablePopupAllFieldList();
+                    // MapLayer.instance.disablePopupAllFieldList();
                     cc.log("FLOW UpgradeStorage!!!!!!!!!!!!!!!!!!!");
 
                 } else {
