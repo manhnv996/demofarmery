@@ -7,6 +7,12 @@ var res = {
     //font
     FONT_BITMAP_NUMBER_1:"fonts/number_1.fnt",
     FONT_BITMAP_DICE_NUMBER: "fonts/diceNumber.fnt",
+    //
+    FONT_EFFECT_NUMBER: "fonts/eff_number.fnt",
+    FONT_OUTLINE_20: "fonts/outline/20.fnt",
+    FONT_OUTLINE_30: "fonts/outline/30.fnt",
+    FONT_OUTLINE_50: "fonts/outline/50.fnt",
+
     //zcsd
     //screen
     ZCSD_SCREEN_MENU:"zcsd/screen_menu.json",
@@ -57,12 +63,16 @@ var res = {
     slot: "res/Art/Crops/Gui-act/slot.png",
     tooltip: "res/Art/Crops/Gui-act/tooltip.png",
     ten: "res/Art/Crops/Gui-act/ten.png",
+    btBoost: "res/Art/Crops/Gui-act/button-energy2.png",
+    rubi: "res/Art/Crops/Gui-act/hethat/ngoc-nho.png",
 
 
 
     progressbar: "res/Art/Main Gui/exp-111.png",
     progress: "res/Art/Main Gui/exp-221.png",
-    btBoost: "res/Art/Main Gui/button-energy2.png",
+
+    bgNotice: "res/Art/Storage/gui-thongbao.png",
+    msgFullFoodStorage: "res/Art/Storage/Kho chứa đồ đã đầy!.png",
 
 
     //plant animation
@@ -96,6 +106,8 @@ var g_resources = [
     "fonts/eff_number.png",
     "fonts/number_1.fnt",
     "fonts/number_1.png",
+    "fonts/outline/20.fnt",
+    "fonts/outline/20.png",
     "game/animation/character/chipu/texture.plist",
     "game/animation/character/chipu/texture.png",
     "game/animation/eff_dice_number/texture.plist",

@@ -28,7 +28,6 @@ var FieldSprite = MapBlockSprite.extend({
         //
         this.render(fieldId);
 
-
         this.addTouchEventListener(parent, fieldId);
 
 
@@ -85,30 +84,7 @@ var FieldSprite = MapBlockSprite.extend({
                 return false;
             },
             onTouchMoved: function (touch, event) {
-
-                var delta = touch.getDelta();
-
-                //this.x += delta.x / lstScale;
-                //this.y += delta.y / lstScale;
-                //this.x = x / lstScale;
-                //this.y = y / lstScale;
-
-                //cc.log("onTouchMoved: " + delta.x + ", " + delta.y);
-
-                //Call ctrl
-                //var fieldSelected = PlantCtrl.instance.onDragCropTool(this.x, this.y);
-                /*
-                 INPROGRESS
-                 *
-                 */
-
-
-
-
-                //var seedBoundingBox = this.getBoundingBox();
-                //if (cc.rectIntersectsRect(seedBoundingBox, runnerBoundingBox)){
-                //    cc.log("va chạm");
-                //}
+                // var delta = touch.getDelta();
 
             }.bind(this),
 
@@ -120,14 +96,16 @@ var FieldSprite = MapBlockSprite.extend({
                 PlantCtrl.instance.onFieldSelected(fieldId);
                 //parent.showSeedPopup();
 
-                //this.loadAnimFrames(4, "caroot", 0.2);
-                //this.runAnimationForever();
-
             }
         });
         cc.eventManager.addListener(touchListener, this);
     },
 
+    addBoostEvent: function (sender) {
+
+        PlantCtrl.instance.boostPlant(this.fieldId);
+
+    },
 
     //loadAnimFrames: function(num, str_seed_key, speed){
     //    //cc.spriteFrameCache.addSpriteFrames(seed_plist); // sprite cache
@@ -164,7 +142,6 @@ var FieldSprite = MapBlockSprite.extend({
 
             this.plantSprite = fr.createAnimationById(getResAniIdBySeedType(seedType), this);
 
-            // this.plantSprite.setPosition(cc.p(0 + 6, this.height + 12));
             this.plantSprite.setPosition(cc.p(0, this.height));
             this.addChild(this.plantSprite);
             // this.plantSprite.getAnimation().setTimeScale(1);
@@ -178,13 +155,10 @@ var FieldSprite = MapBlockSprite.extend({
             //var plantTypeObj = getProductObjByType(user.getAsset().getFieldList()[this.fieldId].getPlantType());
             var plantTypeObj = getProductObjByType(seedType);
 
-            //this.plantSprite = fr.createAnimationById(resAniId.Carot, this);
-            //this.addChild(this.plantSprite);
+
             this.plantSprite.getAnimation().setTimeScale(0.5);
             this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.cropAni,-1, -1, 1);
 
-
-            //this.fieldList[index].changeTexture(res.field);
         }
         this.seedType = null;
 
@@ -266,7 +240,12 @@ var FieldSprite = MapBlockSprite.extend({
             //
             var remain = new Date();
             remain.setTime(duration - curr);
-            var timeRemainShow = remain.getMinutes() + ": " + remain.getSeconds();
+            var timeRemainShow = "";
+            if (duration - curr > 60 * 60 * 1000){
+                timeRemainShow = remain.getHours() + ": " + remain.getMinutes() + ": " + remain.getSeconds();
+            } else {
+                timeRemainShow = remain.getMinutes() + ": " + remain.getSeconds();
+            }
             this.timeRemain.setString(timeRemainShow);
 
         }
@@ -291,7 +270,8 @@ var FieldSprite = MapBlockSprite.extend({
 
 
         // time remain
-        this.timeRemain = new cc.LabelTTF("", "res/fonts/eff_number.fnt", 32);
+        // this.timeRemain = new cc.LabelTTF("", "res/fonts/eff_number.fnt", 32);
+        this.timeRemain = new cc.LabelBMFont("", res.FONT_OUTLINE_50);
         this.timeRemain.setPosition(cc.p(this.progressBar.width / 2, this.progressBar.height));
         // this.timeRemain.setPosition(cc.p(0, 0));
         this.progressBar.addChild(this.timeRemain);
@@ -299,8 +279,15 @@ var FieldSprite = MapBlockSprite.extend({
 
         // button boost
         var btBoost = new ccui.Button(res.btBoost);
-        btBoost.setPosition(cc.p(this.progressBar.width, this.progressBar.height / 2));
+        btBoost.setPosition(cc.p(this.progressBar.width * 10 / 9, this.progressBar.height / 2));
         this.progressBar.addChild(btBoost);
+
+        var rubi = new cc.Sprite(res.rubi);
+        rubi.setPosition(cc.p(btBoost.width * 4 / 5, btBoost.height / 2));
+        btBoost.addChild(rubi);
+        //
+        btBoost.addClickEventListener(this.addBoostEvent.bind(this));
+
 
 
         //
@@ -350,7 +337,7 @@ var FieldSprite = MapBlockSprite.extend({
             }
 
 
-            this.popupBackground.setPosition(- this.width / 4, this.height * 3 / 2);
+            this.popupBackground.setPosition(- this.width / 4, this.height * 7 / 4);
             this.addChild(this.popupBackground);
 
 
@@ -471,14 +458,16 @@ var FieldSprite = MapBlockSprite.extend({
 
     //
     disablePopupBackground: function () {
-
         if (this.popupBackground != null) {
+            /*
+            BUGG
+            WHY ?!
+             */
             // if (this.popupBackground.isVisible()) {
                 this.popupBackground.setVisible(false);
 
                 this.popupBackground = null;
             // }
-
         }
 //
     },//

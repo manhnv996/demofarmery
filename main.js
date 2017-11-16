@@ -91,7 +91,7 @@ cc.game.onStart = function () {
 
         // foodStorage.addItem(ProductTypes.CROP_CORN, 10);
         foodStorage.addItem(ProductTypes.CROP_CARROT, 10);
-        foodStorage.addItem(ProductTypes.CROP_WHEAT, 10);
+        // foodStorage.addItem(ProductTypes.CROP_WHEAT, 10);
         foodStorage.addItem(ProductTypes.CROP_SOYBEAN, 5);
         foodStorage.addItem(ProductTypes.CROP_SUGARCANE, 5);
 

@@ -126,5 +126,20 @@ var Field = CoordinatedObject.extend({
             return FieldStatusTypes.EMPTY;
         }
 
-    }
+    },
+
+    boost: function () {
+        //boolean
+        if (this.checkStatus() == FieldStatusTypes.GROWING){
+            if (user.reduceRuby(1)){
+                var date = new Date();
+                var intDate = date.getTime();
+                this.plantedTime.setTime(intDate - getProductObjByType(this.plantType).time * 1000);
+
+                return true;
+            }
+            return false;
+        }
+        return false;
+    },
 });

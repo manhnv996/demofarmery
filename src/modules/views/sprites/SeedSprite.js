@@ -47,14 +47,13 @@ var SeedSprite = cc.Sprite.extend({
 
 
                     if (target.quantity == null){
-                        cc.log("quantity is null");
 
                         target.removeAllChildrenWithCleanup(true);  //remove all child
 
                         //target.removeFromParent(true);
                         // parent.disablePopup(seedType);
                         /*
-                        INPROGRESS
+                        DONE
                         SHOW LEVEL UNLOCK
                          */
                         target.showInfo();
@@ -89,6 +88,7 @@ var SeedSprite = cc.Sprite.extend({
                  INPROGRESS
                  */
 
+
             }.bind(this),
 
             onTouchEnded: function (touch, event) {
@@ -111,12 +111,13 @@ var SeedSprite = cc.Sprite.extend({
         // this.disablePopup(null);
 
         var popupMsg = cc.Sprite.create(res.tooltip);
-        popupMsg.setPosition(this.width * 4 / 3, this.height * 6 / 5);
+        // popupMsg.setPosition(this.width * 4 / 3, this.height * 6 / 5);
+        popupMsg.setPosition(0, this.height * 6 / 5);
         popupMsg.setScale(0.5);
         this.addChild(popupMsg);
 
 
-        var msg = new cc.LabelTTF("LevelUnlock: " + getProductObjByType(this.seedType).level, "res/fonts/eff_number.fnt", 32);
+        var msg = new cc.LabelBMFont("LevelUnlock: " + getProductObjByType(this.seedType).level, res.FONT_OUTLINE_30);
         msg.setPosition(cc.p(popupMsg.width / 2, popupMsg.height / 2));
         popupMsg.addChild(msg);
 
@@ -126,7 +127,10 @@ var SeedSprite = cc.Sprite.extend({
         /////
         if (this.quantity != null){
 
-            var quantitySeed = new cc.LabelTTF(this.quantity, "res/fonts/eff_number.fnt", 18);
+            var quantitySeed = new cc.LabelBMFont(this.quantity, res.FONT_OUTLINE_20);
+            if (this.quantity == 0){
+                quantitySeed.setString("0");
+            }
 
             var slot = new cc.Sprite(res.slot);
             quantitySeed.setPosition(new cc.p(slot.width / 2, slot.height / 2));

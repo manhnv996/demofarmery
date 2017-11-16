@@ -28,8 +28,8 @@ var MapLayer = (function() {
 			this.renderDuongRay();
 			this.renderDefaultConstruct();
 			this.renderSample();
-			this.setPosition(MapValues.logicToPosition(-6, -7));
-			this.setScale(0.4);
+			this.setPosition(MapValues.logicToPosition(-10, -9));
+			this.setScale(0.6);
 			this.initBorder();
 			this.initEvent();
 
@@ -539,6 +539,18 @@ var MapLayer = (function() {
 			}
 		},
 		//
+
+		//
+		showNoticeFullFoodStorageBG: function () {
+            // this.bgNotice = new cc.Sprite(res.bgNotice);
+            // this.bgNotice.setPosition(300, 300);
+            // this.addChild(this.bgNotice);
+            //
+            // var msgFullFoodStorage = new cc.Sprite(res.msgFullFoodStorage);
+            // this.setPosition(cc.p(this.bgNotice.width / 2, this.bgNotice.height / 2));
+            // this.bgNotice.addChild(msgFullFoodStorage);
+
+        }
 
 
 	});
