@@ -13,6 +13,7 @@ gv.CMD.MOVE = 2001;
 //
 gv.CMD.PLANT = 5001;
 gv.CMD.CROP = 5002;
+gv.CMD.PLANT_BOOST = 5003;
 
 
 gv.CMD.CHECK_STATUS_FIELD = 2091;
@@ -166,6 +167,25 @@ CmdSendCrop = fr.OutPacket.extend(
     }
 );
 
+CmdSendPlantBoost = fr.OutPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+            this.initData(100);
+            this.setCmdId(gv.CMD.PLANT_BOOST);
+        },
+        pack:function(fieldId, productType){
+            this.packHeader();
+
+            this.putShort(fieldId);
+            this.putString(productType);
+
+            this.updateSize();
+        }
+    }
+);
+
 
 
 /**
@@ -275,6 +295,21 @@ testnetwork.packetMap[gv.CMD.PLANT] = fr.InPacket.extend(
 );
 
 testnetwork.packetMap[gv.CMD.CROP] = fr.InPacket.extend(
+    {
+        ctor:function()
+        {
+            this._super();
+        },
+        readData:function(){
+
+            /*
+             INPROGRESS
+             */
+        }
+    }
+);
+
+testnetwork.packetMap[gv.CMD.PLANT_BOOST] = fr.InPacket.extend(
     {
         ctor:function()
         {
