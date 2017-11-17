@@ -496,8 +496,6 @@ var MapLayer = (function() {
 					//
 
 					//
-					//target.disableProgressBarAllFieldList();
-					//target.disablePopupAllFieldList();
 					PopupLayer.instance.disablePopup();
 					PopupLayer.instance.disableProgressBarInprogress();
 

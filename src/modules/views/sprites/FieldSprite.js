@@ -109,6 +109,11 @@ var FieldSprite = MapBlockSprite.extend({
             // this.plantSprite.getAnimation().setTimeScale(1);
             this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.plantAni, -1, -1, 1);
 
+
+            //
+            this.isGrow3 = false;
+            this.isGrow2 = false;
+            this.isGrow1 = false;
         }
     },
     cropAnimation: function (seedType) {
@@ -140,38 +145,43 @@ var FieldSprite = MapBlockSprite.extend({
             return false;
         }
 
-        var parsePlantTime = user.getAsset().getFieldList()[this.fieldId].getPlantedTime().getTime();
-        var parseCropTime = user.getAsset().getFieldList()[this.fieldId].getCropTime().getTime();
-        var currTime = new Date().getTime();
-
-        duration = parseCropTime - parsePlantTime;
-        curr = currTime - parsePlantTime;
-
 
         if (this.plantSprite != null){
 
+            var parsePlantTime = user.getAsset().getFieldList()[this.fieldId].getPlantedTime().getTime();
+            var parseCropTime = user.getAsset().getFieldList()[this.fieldId].getCropTime().getTime();
+            var currTime = new Date().getTime();
+
+            duration = parseCropTime - parsePlantTime;
+            curr = currTime - parsePlantTime;
+
+
             var plantTypeObj = getProductObjByType(this.seedType);
 
-            if (curr > duration + 1000){
-
-                return true;
-            }
-            else if (curr >= duration){
+            if (curr >= duration){
                 //
-
                 //this.plantSprite.getAnimation().setTimeScale(0.5);
-                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow3,-1, -1, 0);
+                if (!this.isGrow3){
+                    this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow3, -1, -1, 0);
+
+                }
+                this.isGrow3 = true;
+
             } else if (curr >= duration * 3 / 4) {
                 //
-                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow2,-1, -1, 1);
+                if (!this.isGrow2){
+                    this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow2, -1, -1, 1);
+
+                }
+                this.isGrow2 = true;
             } else if (curr >= duration / 2) {
-                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow1,-1, -1, 1);
+                if (!this.isGrow1){
+                    this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.grow1, -1, -1, 1);
 
-            } else if(curr >= duration * 1 / 4){
-                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.plantAni,-1, -1, 1);
-
+                }
+                this.isGrow1 = true;
             } else {    // < / 2
-                this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.plantAni,-1, -1, 1);
+                // this.plantSprite.getAnimation().gotoAndPlay(plantTypeObj.plantAni,-1, -1, 1);
 
             }
         }

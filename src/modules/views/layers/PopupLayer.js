@@ -376,7 +376,22 @@ var PopupLayer = cc.Layer.extend({
         return null;
     },
 
+    
+//    //
+    showNoticeFullFoodStorageBG: function () {
 
+        // this.disablePopup(null);
+        // this.disableProgressBarInprogress();
+        //
+        //
+        // this.NoticeBG = cc.Sprite.create(res.bgNotice);
+        // this.NoticeBG.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+        // this.addChild(this.NoticeBG);
+
+
+
+    }
+    
 
 });
 //PopupLayer.instance = new PopupLayer();
